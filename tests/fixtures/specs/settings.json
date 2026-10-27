@@ -1,0 +1,2021 @@
+{
+  "protocol": 1,
+  "extension": "HYPE TIMER",
+  "version": "1.0.0",
+  "title": "HYPE TIMER — Settings  ·  v1.0.0",
+  "subtitle": "by you",
+  "header": {
+    "title": "Hype Timer",
+    "subtitle": "Every sub, cheer and raid adds time. Settings live in `orchid_HYPE TIMER`.",
+    "image": null,
+    "height": 120
+  },
+  "footer": "Need help? https://example.com/discord",
+  "links": [
+    {
+      "text": "Docs",
+      "url": "https://example.com/docs"
+    }
+  ],
+  "tabs": [
+    {
+      "id": "t1",
+      "name": "General",
+      "icon": {
+        "path": "M10.19,5.24 L10.69,2.69 L13.31,2.69 L13.81,5.24 L15.50,5.94 L17.66,4.49 L19.51,6.34 L18.06,8.50 L18.76,10.19 L21.31,10.69 L21.31,13.31 L18.76,13.81 L18.06,15.50 L19.51,17.66 L17.66,19.51 L15.50,18.06 L13.81,18.76 L13.31,21.31 L10.69,21.31 L10.19,18.76 L8.50,18.06 L6.34,19.51 L4.49,17.66 L5.94,15.50 L5.24,13.81 L2.69,13.31 L2.69,10.69 L5.24,10.19 L5.94,8.50 L4.49,6.34 L6.34,4.49 L8.50,5.94 Z M15,12 A3,3 0 1 1 9,12 A3,3 0 1 1 15,12 Z",
+        "grid": 24,
+        "stroke": 1.7,
+        "filled": false
+      },
+      "order": 1
+    },
+    {
+      "id": "t2",
+      "name": "Events",
+      "icon": {
+        "path": "M13,2.5 L4.5,13.5 H11.5 L10.5,21.5 L19.5,10.5 H12.5 Z",
+        "grid": 24,
+        "stroke": 2,
+        "filled": false
+      },
+      "order": 2
+    },
+    {
+      "id": "t3",
+      "name": "Appearance",
+      "icon": {
+        "path": "M12,3 A9,9 0 0 0 12,21 C13.5,21 14.2,20.2 14.2,19.2 C14.2,17.8 13,17.4 13,16.2 C13,15.1 13.9,14.5 15,14.5 H17 A4,4 0 0 0 21,10.5 C21,6.4 17,3 12,3 Z M8.4,11.5 A0.9,0.9 0 1 1 6.6,11.5 A0.9,0.9 0 1 1 8.4,11.5 Z M10.4,7.5 A0.9,0.9 0 1 1 8.6,7.5 A0.9,0.9 0 1 1 10.4,7.5 Z M15.4,7.5 A0.9,0.9 0 1 1 13.6,7.5 A0.9,0.9 0 1 1 15.4,7.5 Z",
+        "grid": 24,
+        "stroke": 2,
+        "filled": false
+      },
+      "order": 3
+    },
+    {
+      "id": "t4",
+      "name": "Goals",
+      "icon": {
+        "path": "M8,4 H16 V10 A4,4 0 0 1 8,10 Z M8,6 H5 V7.5 A3,3 0 0 0 8,10.5 M16,6 H19 V7.5 A3,3 0 0 1 16,10.5 M12,14 V18 M8.5,20.5 H15.5 M10,18 H14 L14.5,20.5 H9.5 Z",
+        "grid": 24,
+        "stroke": 2,
+        "filled": false
+      },
+      "order": 4
+    },
+    {
+      "id": "t5",
+      "name": "Chat",
+      "icon": {
+        "path": "M5,4.5 H19 A2,2 0 0 1 21,6.5 V15 A2,2 0 0 1 19,17 H10 L5.5,20.5 V17 H5 A2,2 0 0 1 3,15 V6.5 A2,2 0 0 1 5,4.5 Z M7.5,9 H16.5 M7.5,12.5 H13.5",
+        "grid": 24,
+        "stroke": 2,
+        "filled": false
+      },
+      "order": 5
+    },
+    {
+      "id": "t6",
+      "name": "Advanced",
+      "icon": {
+        "path": "M14.7,3.3 A5,5 0 0 0 10.2,10.4 L3.9,16.7 A2,2 0 0 0 6.7,19.5 L13,13.2 A5,5 0 0 0 20.1,8.7 L17.2,11.6 L13.9,10.1 L12.4,6.8 Z",
+        "grid": 24,
+        "stroke": 2,
+        "filled": false
+      },
+      "order": 6
+    }
+  ],
+  "fields": [
+    {
+      "id": "f1",
+      "kind": "title",
+      "key": null,
+      "keys": [],
+      "label": null,
+      "description": null,
+      "tab": "t1",
+      "icon": null,
+      "layout": "inline",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": false,
+      "props": {
+        "text": "General Settings"
+      }
+    },
+    {
+      "id": "f2",
+      "kind": "toggle",
+      "key": "enabled",
+      "keys": ["enabled"],
+      "label": "Enabled",
+      "description": "Turn the whole timer on or off.",
+      "tab": "t1",
+      "icon": {
+        "path": "M7,4.5 L19,12 L7,19.5 Z",
+        "grid": 24,
+        "stroke": 2,
+        "filled": false
+      },
+      "layout": "inline",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": false,
+      "props": {}
+    },
+    {
+      "id": "f3",
+      "kind": "duration",
+      "key": "startingTime",
+      "keys": ["startingTime"],
+      "label": "Starting Time",
+      "description": "Time on the clock when the timer starts.",
+      "tab": "t1",
+      "icon": {
+        "path": "M21,12 A9,9 0 1 1 3,12 A9,9 0 1 1 21,12 Z M12,7 V12 L15.5,14",
+        "grid": 24,
+        "stroke": 2,
+        "filled": false
+      },
+      "layout": "inline",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": false,
+      "props": {
+        "showDays": true
+      }
+    },
+    {
+      "id": "f4",
+      "kind": "segmented",
+      "key": "timeFormat",
+      "keys": ["timeFormat"],
+      "label": "Time Format",
+      "description": "How the overlay shows the remaining time.",
+      "tab": "t1",
+      "icon": {
+        "path": "M19.5,13.5 A7.5,7.5 0 1 1 4.5,13.5 A7.5,7.5 0 1 1 19.5,13.5 Z M9.5,2.5 H14.5 M12,2.5 V6 M12,13.5 L15,10.5 M18.3,7.2 L19.8,5.7",
+        "grid": 24,
+        "stroke": 2,
+        "filled": false
+      },
+      "layout": "inline",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": false,
+      "props": {
+        "options": ["dd:hh:mm:ss", "hh:mm:ss", "hh:mm"]
+      }
+    },
+    {
+      "id": "f5",
+      "kind": "dropdown",
+      "key": "currency",
+      "keys": ["currency"],
+      "label": "Currency",
+      "description": "Donations are converted into this currency.",
+      "tab": "t1",
+      "icon": {
+        "path": "M3,6.5 H21 V17.5 H3 Z M14.5,12 A2.5,2.5 0 1 1 9.5,12 A2.5,2.5 0 1 1 14.5,12 Z M6.5,9.5 V9.6 M17.5,14.4 V14.5",
+        "grid": 24,
+        "stroke": 2,
+        "filled": false
+      },
+      "layout": "inline",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": false,
+      "props": {
+        "options": ["USD", "EUR", "GBP", "CAD", "AUD", "JPY", "SEK", "NOK", "DKK", "PLN", "BRL"]
+      }
+    },
+    {
+      "id": "f6",
+      "kind": "separator",
+      "key": null,
+      "keys": [],
+      "label": null,
+      "description": null,
+      "tab": "t1",
+      "icon": null,
+      "layout": "inline",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": false,
+      "props": {}
+    },
+    {
+      "id": "f7",
+      "kind": "title",
+      "key": null,
+      "keys": [],
+      "label": null,
+      "description": null,
+      "tab": "t1",
+      "icon": null,
+      "layout": "inline",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": false,
+      "props": {
+        "text": "Time Limit"
+      }
+    },
+    {
+      "id": "f8",
+      "kind": "toggle",
+      "key": "timeLimit_enabled",
+      "keys": ["timeLimit_enabled"],
+      "label": "Enable Time Limit",
+      "description": "Stop adding time once the limit is reached.",
+      "tab": "t1",
+      "icon": {
+        "path": "M6.5,3 H17.5 M6.5,21 H17.5 M7.5,3 C7.5,8 12,9 12,12 C12,15 7.5,16 7.5,21 M16.5,3 C16.5,8 12,9 12,12 C12,15 16.5,16 16.5,21",
+        "grid": 24,
+        "stroke": 2,
+        "filled": false
+      },
+      "layout": "inline",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": false,
+      "props": {}
+    },
+    {
+      "id": "f9",
+      "kind": "duration",
+      "key": "timeLimit_maxTime",
+      "keys": ["timeLimit_maxTime"],
+      "label": "Maximum Added Time",
+      "description": "The most time contributions can add.",
+      "tab": "t1",
+      "icon": {
+        "path": "M21,12 A9,9 0 1 1 3,12 A9,9 0 1 1 21,12 Z M12,7 V12 L15.5,14",
+        "grid": 24,
+        "stroke": 2,
+        "filled": false
+      },
+      "layout": "inline",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": false,
+      "props": {
+        "showDays": true
+      }
+    },
+    {
+      "id": "f10",
+      "kind": "separator",
+      "key": null,
+      "keys": [],
+      "label": null,
+      "description": null,
+      "tab": "t1",
+      "icon": null,
+      "layout": "inline",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": false,
+      "props": {}
+    },
+    {
+      "id": "f11",
+      "kind": "title",
+      "key": null,
+      "keys": [],
+      "label": null,
+      "description": null,
+      "tab": "t1",
+      "icon": null,
+      "layout": "inline",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": false,
+      "props": {
+        "text": "Happy Hour"
+      }
+    },
+    {
+      "id": "f12",
+      "kind": "info",
+      "key": null,
+      "keys": [],
+      "label": null,
+      "description": null,
+      "tab": "t1",
+      "icon": null,
+      "layout": "inline",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": false,
+      "props": {
+        "text": "Start a happy hour with **!happyhour** to multiply all added time for a while.",
+        "kind": "info"
+      }
+    },
+    {
+      "id": "f13",
+      "kind": "stepper",
+      "key": "happyHour_multiplier",
+      "keys": ["happyHour_multiplier"],
+      "label": "Multiplier",
+      "description": "1 = +100% (double time).",
+      "tab": "t1",
+      "icon": {
+        "path": "M13,2.5 L4.5,13.5 H11.5 L10.5,21.5 L19.5,10.5 H12.5 Z",
+        "grid": 24,
+        "stroke": 2,
+        "filled": false
+      },
+      "layout": "inline",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": false,
+      "props": {
+        "min": 0.05,
+        "max": 10,
+        "step": 0.05,
+        "decimals": 2,
+        "integer": false
+      }
+    },
+    {
+      "id": "f14",
+      "kind": "slider",
+      "key": "happyHour_duration",
+      "keys": ["happyHour_duration"],
+      "label": "Duration",
+      "description": "How long a happy hour lasts, in seconds.",
+      "tab": "t1",
+      "icon": {
+        "path": "M6.5,3 H17.5 M6.5,21 H17.5 M7.5,3 C7.5,8 12,9 12,12 C12,15 7.5,16 7.5,21 M16.5,3 C16.5,8 12,9 12,12 C12,15 16.5,16 16.5,21",
+        "grid": 24,
+        "stroke": 2,
+        "filled": false
+      },
+      "layout": "inline",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": true,
+      "props": {
+        "min": 10,
+        "max": 86400,
+        "largeChange": 4320,
+        "toggle": false
+      }
+    },
+    {
+      "id": "f15",
+      "kind": "title",
+      "key": null,
+      "keys": [],
+      "label": null,
+      "description": null,
+      "tab": "t2",
+      "icon": null,
+      "layout": "inline",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": false,
+      "props": {
+        "text": "Subscriptions"
+      }
+    },
+    {
+      "id": "f16",
+      "kind": "description",
+      "key": null,
+      "keys": [],
+      "label": null,
+      "description": null,
+      "tab": "t2",
+      "icon": null,
+      "layout": "inline",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": false,
+      "props": {
+        "text": "Seconds added per event. Use the switch to turn an event type off."
+      }
+    },
+    {
+      "id": "f17",
+      "kind": "slider",
+      "key": "time_prime",
+      "keys": ["time_prime", "time_prime_enabled"],
+      "label": "Prime",
+      "description": "Seconds per Prime sub.",
+      "tab": "t2",
+      "icon": {
+        "path": "M12,3.3 L14.41,9.48 L21.04,9.86 L15.9,14.07 L17.58,20.49 L12,16.9 L6.42,20.49 L8.1,14.07 L2.96,9.86 L9.59,9.48 Z",
+        "grid": 24,
+        "stroke": 2,
+        "filled": false
+      },
+      "layout": "inline",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": true,
+      "props": {
+        "min": 1,
+        "max": 3600,
+        "largeChange": 180,
+        "toggle": true,
+        "enabledKey": "time_prime_enabled"
+      }
+    },
+    {
+      "id": "f18",
+      "kind": "slider",
+      "key": "time_t1",
+      "keys": ["time_t1", "time_t1_enabled"],
+      "label": "Tier 1",
+      "description": "Seconds per Tier 1 sub.",
+      "tab": "t2",
+      "icon": {
+        "path": "M12,3.3 L14.41,9.48 L21.04,9.86 L15.9,14.07 L17.58,20.49 L12,16.9 L6.42,20.49 L8.1,14.07 L2.96,9.86 L9.59,9.48 Z",
+        "grid": 24,
+        "stroke": 2,
+        "filled": false
+      },
+      "layout": "inline",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": true,
+      "props": {
+        "min": 1,
+        "max": 3600,
+        "largeChange": 180,
+        "toggle": true,
+        "enabledKey": "time_t1_enabled"
+      }
+    },
+    {
+      "id": "f19",
+      "kind": "slider",
+      "key": "time_t2",
+      "keys": ["time_t2", "time_t2_enabled"],
+      "label": "Tier 2",
+      "description": "Seconds per Tier 2 sub.",
+      "tab": "t2",
+      "icon": {
+        "path": "M12,3.3 L14.41,9.48 L21.04,9.86 L15.9,14.07 L17.58,20.49 L12,16.9 L6.42,20.49 L8.1,14.07 L2.96,9.86 L9.59,9.48 Z",
+        "grid": 24,
+        "stroke": 2,
+        "filled": false
+      },
+      "layout": "inline",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": true,
+      "props": {
+        "min": 1,
+        "max": 3600,
+        "largeChange": 180,
+        "toggle": true,
+        "enabledKey": "time_t2_enabled"
+      }
+    },
+    {
+      "id": "f20",
+      "kind": "slider",
+      "key": "time_t3",
+      "keys": ["time_t3", "time_t3_enabled"],
+      "label": "Tier 3",
+      "description": "Seconds per Tier 3 sub.",
+      "tab": "t2",
+      "icon": {
+        "path": "M12,3.3 L14.41,9.48 L21.04,9.86 L15.9,14.07 L17.58,20.49 L12,16.9 L6.42,20.49 L8.1,14.07 L2.96,9.86 L9.59,9.48 Z",
+        "grid": 24,
+        "stroke": 2,
+        "filled": false
+      },
+      "layout": "inline",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": true,
+      "props": {
+        "min": 1,
+        "max": 3600,
+        "largeChange": 180,
+        "toggle": true,
+        "enabledKey": "time_t3_enabled"
+      }
+    },
+    {
+      "id": "f21",
+      "kind": "separator",
+      "key": null,
+      "keys": [],
+      "label": null,
+      "description": null,
+      "tab": "t2",
+      "icon": null,
+      "layout": "inline",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": false,
+      "props": {}
+    },
+    {
+      "id": "f22",
+      "kind": "title",
+      "key": null,
+      "keys": [],
+      "label": null,
+      "description": null,
+      "tab": "t2",
+      "icon": null,
+      "layout": "inline",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": false,
+      "props": {
+        "text": "Bits & Raids"
+      }
+    },
+    {
+      "id": "f23",
+      "kind": "slider",
+      "key": "time_bits",
+      "keys": ["time_bits", "time_bits_enabled"],
+      "label": "Bits",
+      "description": "Seconds per 100 bits.",
+      "tab": "t2",
+      "icon": {
+        "path": "M4,8.5 H20 V12 H4 Z M5.5,12 V20 H18.5 V12 M12,8.5 V20 M12,8.5 C10.5,5 7.5,4 7,6 C6.5,8 9.5,8.5 12,8.5 C14.5,8.5 17.5,8 17,6 C16.5,4 13.5,5 12,8.5",
+        "grid": 24,
+        "stroke": 2,
+        "filled": false
+      },
+      "layout": "inline",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": true,
+      "props": {
+        "min": 1,
+        "max": 3600,
+        "largeChange": 180,
+        "toggle": true,
+        "enabledKey": "time_bits_enabled"
+      }
+    },
+    {
+      "id": "f24",
+      "kind": "stepper",
+      "key": "bits_minimum",
+      "keys": ["bits_minimum"],
+      "label": "Minimum Cheer",
+      "description": "Cheers below this amount add nothing.",
+      "tab": "t2",
+      "icon": {
+        "path": "M3.5,5 H20.5 L14,12.5 V19 L10,21 V12.5 Z",
+        "grid": 24,
+        "stroke": 2,
+        "filled": false
+      },
+      "layout": "inline",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": false,
+      "props": {
+        "min": 1,
+        "max": 100000,
+        "step": 50,
+        "decimals": 0,
+        "integer": true
+      }
+    },
+    {
+      "id": "f25",
+      "kind": "slider",
+      "key": "time_raid",
+      "keys": ["time_raid", "time_raid_enabled"],
+      "label": "Raids",
+      "description": "Seconds per 10 raiders.",
+      "tab": "t2",
+      "icon": {
+        "path": "M12.5,7.5 A3.5,3.5 0 1 1 5.5,7.5 A3.5,3.5 0 1 1 12.5,7.5 Z M2.5,20 C2.5,16 5.5,14 9,14 C12.5,14 15.5,16 15.5,20 M15.5,4.3 A3.5,3.5 0 0 1 15.5,10.7 M18,14.3 C20.2,15 21.5,17 21.5,20",
+        "grid": 24,
+        "stroke": 2,
+        "filled": false
+      },
+      "layout": "inline",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": true,
+      "props": {
+        "min": 1,
+        "max": 3600,
+        "largeChange": 180,
+        "toggle": true,
+        "enabledKey": "time_raid_enabled"
+      }
+    },
+    {
+      "id": "f26",
+      "kind": "separator",
+      "key": null,
+      "keys": [],
+      "label": null,
+      "description": null,
+      "tab": "t2",
+      "icon": null,
+      "layout": "inline",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": false,
+      "props": {}
+    },
+    {
+      "id": "f27",
+      "kind": "title",
+      "key": null,
+      "keys": [],
+      "label": null,
+      "description": null,
+      "tab": "t2",
+      "icon": null,
+      "layout": "inline",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": false,
+      "props": {
+        "text": "Channel Point Rewards"
+      }
+    },
+    {
+      "id": "f28",
+      "kind": "multiselect",
+      "key": "rewards",
+      "keys": ["rewards"],
+      "label": "Contributing Rewards",
+      "description": "Redemptions of these rewards add time. Click refresh after creating new rewards.",
+      "tab": "t2",
+      "icon": {
+        "path": "M12,20.5 C5,16 2.5,12 2.5,8.5 C2.5,5.5 5,3.5 7.5,3.5 C9.5,3.5 11,4.6 12,6.2 C13,4.6 14.5,3.5 16.5,3.5 C19,3.5 21.5,5.5 21.5,8.5 C21.5,12 19,16 12,20.5 Z",
+        "grid": 24,
+        "stroke": 2,
+        "filled": false
+      },
+      "layout": "expander",
+      "tooltip": null,
+      "placeholder": "Add a reward…",
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": false,
+      "props": {
+        "api": "AddMultiSelect",
+        "options": ["Add 5 minutes", "Hydrate", "Pet the cat", "Song request"],
+        "refreshable": true
+      }
+    },
+    {
+      "id": "f29",
+      "kind": "title",
+      "key": null,
+      "keys": [],
+      "label": null,
+      "description": null,
+      "tab": "t3",
+      "icon": null,
+      "layout": "inline",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": false,
+      "props": {
+        "text": "Overlay Style"
+      }
+    },
+    {
+      "id": "f30",
+      "kind": "dropdown",
+      "key": "font",
+      "keys": ["font"],
+      "label": "Font",
+      "description": "Font used by the overlay.",
+      "tab": "t3",
+      "icon": {
+        "path": "M5,6.5 V4 H19 V6.5 M12,4 V20 M9,20 H15",
+        "grid": 24,
+        "stroke": 2,
+        "filled": false
+      },
+      "layout": "inline",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": false,
+      "props": {
+        "options": ["Poppins", "Inter", "Montserrat", "Nunito", "Bebas Neue", "Quicksand", "Roboto"]
+      }
+    },
+    {
+      "id": "f31",
+      "kind": "color",
+      "key": "fontColor",
+      "keys": ["fontColor"],
+      "label": "Font Color",
+      "description": "Main text colour.",
+      "tab": "t3",
+      "icon": {
+        "path": "M12,3 A9,9 0 0 0 12,21 C13.5,21 14.2,20.2 14.2,19.2 C14.2,17.8 13,17.4 13,16.2 C13,15.1 13.9,14.5 15,14.5 H17 A4,4 0 0 0 21,10.5 C21,6.4 17,3 12,3 Z M8.4,11.5 A0.9,0.9 0 1 1 6.6,11.5 A0.9,0.9 0 1 1 8.4,11.5 Z M10.4,7.5 A0.9,0.9 0 1 1 8.6,7.5 A0.9,0.9 0 1 1 10.4,7.5 Z M15.4,7.5 A0.9,0.9 0 1 1 13.6,7.5 A0.9,0.9 0 1 1 15.4,7.5 Z",
+        "grid": 24,
+        "stroke": 2,
+        "filled": false
+      },
+      "layout": "inline",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": false,
+      "props": {
+        "alpha": false
+      }
+    },
+    {
+      "id": "f32",
+      "kind": "color",
+      "key": "backgroundColor",
+      "keys": ["backgroundColor"],
+      "label": "Background",
+      "description": "Card background, with transparency.",
+      "tab": "t3",
+      "icon": {
+        "path": "M15.6,12 A3.6,3.6 0 1 1 8.4,12 A3.6,3.6 0 1 1 15.6,12 Z M18.6,12 L21.2,12 M16.67,16.67 L18.51,18.51 M12,18.6 L12,21.2 M7.33,16.67 L5.49,18.51 M5.4,12 L2.8,12 M7.33,7.33 L5.49,5.49 M12,5.4 L12,2.8 M16.67,7.33 L18.51,5.49",
+        "grid": 24,
+        "stroke": 2,
+        "filled": false
+      },
+      "layout": "inline",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": false,
+      "props": {
+        "alpha": true
+      }
+    },
+    {
+      "id": "f33",
+      "kind": "slider",
+      "key": "cornerRadius",
+      "keys": ["cornerRadius"],
+      "label": "Corner Radius",
+      "description": "Roundness of the cards in pixels.",
+      "tab": "t3",
+      "icon": {
+        "path": "M15.5,4.5 L19.5,8.5 L8.5,19.5 H4.5 V15.5 Z M13,7 L17,11",
+        "grid": 24,
+        "stroke": 2,
+        "filled": false
+      },
+      "layout": "inline",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": true,
+      "props": {
+        "min": 0,
+        "max": 40,
+        "largeChange": 2,
+        "toggle": false
+      }
+    },
+    {
+      "id": "f34",
+      "kind": "stepper",
+      "key": "zoom",
+      "keys": ["zoom"],
+      "label": "Zoom",
+      "description": "1 = 100%.",
+      "tab": "t3",
+      "icon": {
+        "path": "M18,11 A7,7 0 1 1 4,11 A7,7 0 1 1 18,11 Z M16.2,16.2 L20.5,20.5 M8,11 H14 M11,8 V14",
+        "grid": 24,
+        "stroke": 2,
+        "filled": false
+      },
+      "layout": "inline",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": false,
+      "props": {
+        "min": 0.5,
+        "max": 3,
+        "step": 0.1,
+        "decimals": 1,
+        "integer": false
+      }
+    },
+    {
+      "id": "f35",
+      "kind": "image",
+      "key": "logo",
+      "keys": ["logo"],
+      "label": "Logo",
+      "description": "Image URL or file path shown above the timer.",
+      "tab": "t3",
+      "icon": {
+        "path": "M5,4 H19 A2,2 0 0 1 21,6 V18 A2,2 0 0 1 19,20 H5 A2,2 0 0 1 3,18 V6 A2,2 0 0 1 5,4 Z M3,16 L8,11 L13,16 M12,15 L15,12 L21,18 M17,8.5 A1.5,1.5 0 1 1 14,8.5 A1.5,1.5 0 1 1 17,8.5 Z",
+        "grid": 24,
+        "stroke": 2,
+        "filled": false
+      },
+      "layout": "stacked",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": false,
+      "props": {
+        "api": "AddImageInput",
+        "filter": "Images (*.png;*.jpg;*.jpeg;*.gif;*.bmp;*.webp)|*.png;*.jpg;*.jpeg;*.gif;*.bmp;*.webp"
+      }
+    },
+    {
+      "id": "f36",
+      "kind": "copy",
+      "key": null,
+      "keys": [],
+      "label": "Overlay URL",
+      "description": "Add this as a Browser Source in OBS.",
+      "tab": "t3",
+      "icon": {
+        "path": "M10,13.5 A4,4 0 0 0 15.66,13.5 L18.5,10.66 A4,4 0 0 0 12.84,5 L11.4,6.4 M14,10.5 A4,4 0 0 0 8.34,10.5 L5.5,13.34 A4,4 0 0 0 11.16,19 L12.6,17.6",
+        "grid": 24,
+        "stroke": 2,
+        "filled": false
+      },
+      "layout": "inline",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": false,
+      "props": {}
+    },
+    {
+      "id": "f37",
+      "kind": "title",
+      "key": null,
+      "keys": [],
+      "label": null,
+      "description": null,
+      "tab": "t4",
+      "icon": null,
+      "layout": "inline",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": false,
+      "props": {
+        "text": "Goals"
+      }
+    },
+    {
+      "id": "f38",
+      "kind": "list",
+      "key": "goals",
+      "keys": ["goals"],
+      "label": "Goal List",
+      "description": "Each row is one goal: what counts, how many, and the reward text.",
+      "tab": "t4",
+      "icon": {
+        "path": "M5,21 V4 M5,4 C8,2.5 10,5.5 13,4.5 C15,3.8 17,3.5 19,4.5 V13.5 C17,12.5 15,12.8 13,13.5 C10,14.5 8,11.5 5,13",
+        "grid": 24,
+        "stroke": 2,
+        "filled": false
+      },
+      "layout": "expander",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": false,
+      "props": {
+        "api": "AddTable",
+        "flat": false,
+        "columns": [
+          {
+            "header": "Counts",
+            "kind": "choice",
+            "weight": 1.3,
+            "options": ["Subs", "Bits", "Donations", "Raids", "Combined"]
+          },
+          {
+            "header": "Target",
+            "kind": "number",
+            "weight": 0.8,
+            "min": 0,
+            "max": 1000000000
+          },
+          {
+            "header": "Reward",
+            "kind": "text",
+            "weight": 2.4
+          }
+        ]
+      }
+    },
+    {
+      "id": "f39",
+      "kind": "list",
+      "key": "rotator",
+      "keys": ["rotator"],
+      "label": "Rotator Messages",
+      "description": "Shown one after another under the timer.",
+      "tab": "t4",
+      "icon": {
+        "path": "M9,6 H20 M9,12 H20 M9,18 H20 M5.4,6 A0.6,0.6 0 1 1 4.2,6 A0.6,0.6 0 1 1 5.4,6 Z M5.4,12 A0.6,0.6 0 1 1 4.2,12 A0.6,0.6 0 1 1 5.4,12 Z M5.4,18 A0.6,0.6 0 1 1 4.2,18 A0.6,0.6 0 1 1 5.4,18 Z",
+        "grid": 24,
+        "stroke": 2,
+        "filled": false
+      },
+      "layout": "expander",
+      "tooltip": null,
+      "placeholder": "Type a message…",
+      "width": 0,
+      "collapsed": true,
+      "hasFormat": false,
+      "props": {
+        "api": "AddTextList",
+        "flat": true,
+        "columns": [
+          {
+            "header": "Value",
+            "kind": "text",
+            "weight": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "f40",
+      "kind": "title",
+      "key": null,
+      "keys": [],
+      "label": null,
+      "description": null,
+      "tab": "t5",
+      "icon": null,
+      "layout": "inline",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": false,
+      "props": {
+        "text": "Chat Responses"
+      }
+    },
+    {
+      "id": "f41",
+      "kind": "description",
+      "key": null,
+      "keys": [],
+      "label": null,
+      "description": null,
+      "tab": "t5",
+      "icon": null,
+      "layout": "inline",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": false,
+      "props": {
+        "text": "Leave a field as a single `-` to disable that message."
+      }
+    },
+    {
+      "id": "f42",
+      "kind": "text",
+      "key": "chat_timeAdded",
+      "keys": ["chat_timeAdded"],
+      "label": "Time Added",
+      "description": "Variables: %user%, %addedTime%, %addedSeconds%",
+      "tab": "t5",
+      "icon": null,
+      "layout": "stacked",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": false,
+      "props": {
+        "lines": 1,
+        "password": false,
+        "wide": true
+      }
+    },
+    {
+      "id": "f43",
+      "kind": "text",
+      "key": "chat_finished",
+      "keys": ["chat_finished"],
+      "label": "Timer Finished",
+      "description": "Variables: %totalTime%",
+      "tab": "t5",
+      "icon": null,
+      "layout": "stacked",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": false,
+      "props": {
+        "lines": 1,
+        "password": false,
+        "wide": true
+      }
+    },
+    {
+      "id": "f44",
+      "kind": "title",
+      "key": null,
+      "keys": [],
+      "label": null,
+      "description": null,
+      "tab": "t6",
+      "icon": null,
+      "layout": "inline",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": false,
+      "props": {
+        "text": "Advanced"
+      }
+    },
+    {
+      "id": "f45",
+      "kind": "toggle",
+      "key": "onlyWhenLive",
+      "keys": ["onlyWhenLive"],
+      "label": "Only Add When Live",
+      "description": "Ignore events while you're offline.",
+      "tab": "t6",
+      "icon": {
+        "path": "M4,6 H14 A2,2 0 0 1 16,8 V16 A2,2 0 0 1 14,18 H4 A2,2 0 0 1 2,16 V8 A2,2 0 0 1 4,6 Z M16,10.5 L22,7 V17 L16,13.5",
+        "grid": 24,
+        "stroke": 2,
+        "filled": false
+      },
+      "layout": "inline",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": false,
+      "props": {}
+    },
+    {
+      "id": "f46",
+      "kind": "text",
+      "key": "apiToken",
+      "keys": ["apiToken"],
+      "label": "API Token",
+      "description": "Stored in plain text inside Streamer.bot's global variables.",
+      "tab": "t6",
+      "icon": {
+        "path": "M12,16 A4,4 0 1 1 4,16 A4,4 0 1 1 12,16 Z M10.9,13.1 L20,4 M17.5,6.5 L20,9 M15,9 L17,11",
+        "grid": 24,
+        "stroke": 2,
+        "filled": false
+      },
+      "layout": "inline",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": false,
+      "props": {
+        "lines": 1,
+        "password": true,
+        "wide": false
+      }
+    },
+    {
+      "id": "f47",
+      "kind": "path",
+      "key": "backupFile",
+      "keys": ["backupFile"],
+      "label": "Restore Backup",
+      "description": "Pick a backup file and click Load.",
+      "tab": "t6",
+      "icon": {
+        "path": "M5,3 H16 L21,8 V19 A2,2 0 0 1 19,21 H5 A2,2 0 0 1 3,19 V5 A2,2 0 0 1 5,3 Z M7.5,3 V8 H15 V3 M7,21 V14 H17 V21",
+        "grid": 24,
+        "stroke": 2,
+        "filled": false
+      },
+      "layout": "stacked",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": false,
+      "props": {
+        "api": "AddFilePicker",
+        "folder": false,
+        "filter": "Backup files (*.json)|*.json",
+        "start": "<Streamer.bot>/HYPE TIMER Backups",
+        "actionText": "Load"
+      }
+    },
+    {
+      "id": "f48",
+      "kind": "button",
+      "key": null,
+      "keys": [],
+      "label": "Log Settings",
+      "description": "Writes every value to the Streamer.bot log.",
+      "tab": "t6",
+      "icon": {
+        "path": "M14,3 H7 A2,2 0 0 0 5,5 V19 A2,2 0 0 0 7,21 H17 A2,2 0 0 0 19,19 V8 Z M14,3 V8 H19 M9,13 H15 M9,17 H13",
+        "grid": 24,
+        "stroke": 2,
+        "filled": false
+      },
+      "layout": "inline",
+      "tooltip": null,
+      "placeholder": null,
+      "width": 0,
+      "collapsed": false,
+      "hasFormat": false,
+      "props": {
+        "text": "Log now",
+        "primary": false
+      }
+    }
+  ],
+  "theme": {
+    "name": null,
+    "isDark": true,
+    "colors": {
+      "Accent": "#FFF28AC9",
+      "Accent2": "#FFA57CDB",
+      "AccentHover": "#E6F28AC9",
+      "AccentPressed": "#CCF28AC9",
+      "Card": "#0FF4EFFB",
+      "CardBorder": "#12F4EFFB",
+      "CardExpanded": "#08F4EFFB",
+      "CardHover": "#18F4EFFB",
+      "Chip": "#40A57CDB",
+      "ChipBorder": "#66A57CDB",
+      "CloseHover": "#FFC42B1C",
+      "ClosePressed": "#E6C42B1C",
+      "Code": "#FFF5A7D6",
+      "CodeBackground": "#38A57CDB",
+      "ControlSolid": "#FF4B4652",
+      "Danger": "#FFFF8E9E",
+      "DangerBg": "#FF3E2633",
+      "Divider": "#15F4EFFB",
+      "Focus": "#FFF7F2FA",
+      "FocusInner": "#B3000000",
+      "HeroBorder": "#26FFFFFF",
+      "HeroEnd": "#FF96567D",
+      "HeroOrb1": "#30F28AC9",
+      "HeroOrb2": "#38A57CDB",
+      "HeroStart": "#FF5B4478",
+      "HeroText": "#FFFFFFFF",
+      "HeroTextMuted": "#E0FFFFFF",
+      "Info": "#FFF28AC9",
+      "InfoBg": "#FF332643",
+      "Input": "#10F4EFFB",
+      "InputBorder": "#14F4EFFB",
+      "InputFocus": "#CC0F0C14",
+      "InputHover": "#17F4EFFB",
+      "InputUnderline": "#8BF4EFFB",
+      "Link": "#FFF49CD1",
+      "MicaTint": "#B816111D",
+      "OnAccent": "#FF241B30",
+      "OnAccentMuted": "#99241B30",
+      "OnStatus": "#E4000000",
+      "Overlay": "#70000000",
+      "Pane": "#00000000",
+      "Popup": "#FF2A2531",
+      "PopupBorder": "#FF423D49",
+      "Scrollbar": "#8BF4EFFB",
+      "Selection": "#A0A57CDB",
+      "SubtleHover": "#10F4EFFB",
+      "SubtlePressed": "#0AF4EFFB",
+      "Success": "#FF6CCB5F",
+      "SuccessBg": "#FF253128",
+      "Surface": "#66211C28",
+      "Text": "#FFF7F2FA",
+      "TextDisabled": "#5DF7F2FA",
+      "TextMuted": "#8AF7F2FA",
+      "TextSecondary": "#C5F7F2FA",
+      "TitleBar": "#00000000",
+      "ToggleOff": "#22000000",
+      "ToggleOffHover": "#10F4EFFB",
+      "Warning": "#FFF5C451",
+      "WarningBg": "#FF3C2F26",
+      "White": "#FFFFFFFF",
+      "WindowBg": "#FF16111D",
+      "WindowBorder": "#FF423D49"
+    },
+    "gradients": [
+      {
+        "key": "ElevationBorder",
+        "x1": 0,
+        "y1": 0,
+        "x2": 0,
+        "y2": 1,
+        "colors": ["#1AF4EFFB", "#1AF4EFFB", "#14F4EFFB"],
+        "offsets": [0, 0.9, 1]
+      },
+      {
+        "key": "AccentElevationBorder",
+        "x1": 0,
+        "y1": 0,
+        "x2": 0,
+        "y2": 1,
+        "colors": ["#14FFFFFF", "#14FFFFFF", "#23000000"],
+        "offsets": [0, 0.88, 1]
+      },
+      {
+        "key": "Hero",
+        "x1": 0,
+        "y1": 0,
+        "x2": 1,
+        "y2": 1,
+        "colors": ["#FF5B4478", "#FF7B4E7B", "#FF96567D"],
+        "offsets": [0, 0.55, 1]
+      },
+      {
+        "key": "AppIcon",
+        "x1": 0,
+        "y1": 0,
+        "x2": 1,
+        "y2": 1,
+        "colors": ["#FFA57CDB", "#FFF28AC9"],
+        "offsets": [0, 1]
+      }
+    ],
+    "fonts": {
+      "body": "Segoe UI Variable Text, Segoe UI, Noto Sans, Open Sans, Ubuntu, Cantarell, DejaVu Sans, Arial, Tahoma",
+      "heading": "Segoe UI Variable Display, Segoe UI Semibold, Segoe UI, Noto Sans, Open Sans, Ubuntu, DejaVu Sans, Arial, Tahoma",
+      "mono": "Cascadia Mono, Consolas, JetBrains Mono, DejaVu Sans Mono, Liberation Mono, Courier New",
+      "fileName": null,
+      "fileData": null
+    },
+    "sizes": {
+      "font": 14,
+      "small": 12,
+      "pageTitle": 28,
+      "sectionTitle": 14,
+      "heroTitle": 30
+    },
+    "headingWeight": "SemiBold",
+    "radii": {
+      "corner": 6,
+      "large": 10
+    },
+    "border": 1,
+    "shadows": true
+  },
+  "window": {
+    "width": 1180,
+    "height": 800,
+    "minWidth": 720,
+    "minHeight": 420,
+    "maxWidth": 0,
+    "maxHeight": 0,
+    "resizable": true,
+    "canMinimize": true,
+    "canMaximize": true,
+    "topmost": false,
+    "showInTaskbar": true,
+    "allowZoom": true,
+    "chrome": "native",
+    "backdrop": "mica",
+    "maximized": false,
+    "scale": 1
+  },
+  "layout": {
+    "navigation": "sidebar",
+    "pane": "auto",
+    "paneWidth": 280,
+    "compactPaneBelow": 1000,
+    "contentMaxWidth": 1000,
+    "contentPadding": 36,
+    "density": "normal",
+    "inputWidth": 280,
+    "dropdownWidth": 240,
+    "sliderWidth": 220,
+    "showPageTitle": true,
+    "showSearch": true,
+    "showStatus": true,
+    "showDiscard": true,
+    "showSave": true,
+    "showSaveAndClose": true,
+    "showDirtyMarkers": true,
+    "showTitleBarName": true,
+    "animations": true,
+    "autoSave": false,
+    "toastSeconds": 3.2,
+    "showImportExport": true,
+    "showResetAll": true,
+    "showAbout": true
+  },
+  "strings": {
+    "WindowTitle": "{0} — Settings",
+    "Save": "Save",
+    "SaveAndClose": "Save & close",
+    "Discard": "Discard",
+    "Done": "Done",
+    "UnsavedChanges": "Unsaved changes",
+    "AllSaved": "All changes saved",
+    "SavedAt": "Saved at {0}",
+    "AutoSaved": "Changes save automatically",
+    "NeedsAttention": "{0} setting(s) need attention",
+    "FixBeforeSaving": "Fix the highlighted settings before saving.",
+    "SettingsSaved": "Settings saved",
+    "ChangesDiscarded": "Changes discarded",
+    "Search": "Search settings",
+    "SearchTooltip": "Search all settings (Ctrl+F)",
+    "NoResults": "No settings match “{0}”",
+    "More": "More",
+    "Import": "Import settings",
+    "Export": "Export settings",
+    "ResetAll": "Reset to defaults",
+    "About": "About",
+    "CollapseNav": "Collapse / expand navigation",
+    "ResetAllTitle": "Reset to defaults?",
+    "ResetAllBody": "Every setting of **{0}** goes back to its default value.\n\nNothing is stored until you click Save.",
+    "ResetAllDone": "Defaults restored. Click Save to keep them.",
+    "Reset": "Reset",
+    "ImportDoneTitle": "Import complete",
+    "ImportDoneBody": "Loaded **{0}** settings from the file.\n\nReview them and click Save to keep them.",
+    "ResetAllBodyAutoSave": "Every setting of **{0}** goes back to its default value, and is saved.",
+    "ResetAllDoneAutoSave": "Defaults restored and saved.",
+    "ImportDoneBodyAutoSave": "Loaded and saved **{0}** settings from the file.",
+    "ExportDone": "Exported to {0}",
+    "JsonFiles": "JSON (*.json)|*.json",
+    "AllFiles": "All files (*.*)|*.*",
+    "SaveChangesTitle": "Save your changes?",
+    "SaveChangesBody": "You have unsaved changes in **{0}**.",
+    "DontSave": "Don't save",
+    "Cancel": "Cancel",
+    "Ok": "OK",
+    "Yes": "Yes",
+    "No": "No",
+    "Close": "Close",
+    "Minimize": "Minimize",
+    "Maximize": "Maximize",
+    "Restore": "Restore",
+    "ErrorTitle": "Something went wrong",
+    "ErrorBody": "{0}\n\nDetails were written to the Streamer.bot log.",
+    "ResetToDefault": "Reset to default",
+    "CopyKey": "Copy key ({0})",
+    "Copied": "Copied to the clipboard",
+    "Copy": "Copy",
+    "On": "On",
+    "Off": "Off",
+    "Refresh": "Refresh list",
+    "Refreshed": "Refreshed “{0}”: {1} items",
+    "Remove": "Remove",
+    "MoveUp": "Move up",
+    "MoveDown": "Move down",
+    "Increase": "Increase",
+    "Decrease": "Decrease",
+    "EnableDisable": "Enable / disable",
+    "PickColor": "Pick a colour",
+    "Browse": "Browse",
+    "ChooseFile": "Choose a file",
+    "ChooseFolder": "Choose a folder",
+    "ImageHint": "Image URL or file path",
+    "NoFileDialog": "The file dialog couldn't open here. Type the path instead.",
+    "NoPreview": "Can't be previewed",
+    "FileNotFound": "File not found",
+    "TooLargeToPreview": "Too large to preview (over 512 KB)",
+    "LoadingPreview": "Loading preview…",
+    "AddItem": "Add item",
+    "AddRow": "Add row",
+    "NoEntries": "No entries yet.",
+    "AddPlaceholder": "Add…",
+    "NothingSelected": "Nothing selected yet.",
+    "NoneSelected": "None selected",
+    "CountSelected": "{0} selected",
+    "Empty": "Empty",
+    "ItemCount": "{0} item(s)",
+    "Item": "item",
+    "Row": "row",
+    "Expand": "Show",
+    "Collapse": "Hide",
+    "RowCount": "{0} row(s)",
+    "Required": "This setting is required.",
+    "Days": "Days",
+    "Hours": "Hours",
+    "Minutes": "Minutes",
+    "Seconds": "Seconds",
+    "DayUnit": "d",
+    "HourUnit": "h",
+    "MinuteUnit": "m",
+    "SecondUnit": "s",
+    "Unsaved": "Unsaved change",
+    "CopyDiagnostics": "Copy diagnostics",
+    "Zoom": "Zoom {0}%"
+  },
+  "startTab": "t1",
+  "zoom": 1,
+  "values": {
+    "enabled": true,
+    "startingTime": "00:06:00:00",
+    "timeFormat": "hh:mm:ss",
+    "currency": "USD",
+    "timeLimit_enabled": false,
+    "timeLimit_maxTime": "01:00:00:00",
+    "happyHour_multiplier": 0.5,
+    "happyHour_duration": 3600,
+    "time_prime": 180,
+    "time_prime_enabled": true,
+    "time_t1": 180,
+    "time_t1_enabled": true,
+    "time_t2": 300,
+    "time_t2_enabled": true,
+    "time_t3": 600,
+    "time_t3_enabled": true,
+    "time_bits": 60,
+    "time_bits_enabled": true,
+    "bits_minimum": 100,
+    "time_raid": 120,
+    "time_raid_enabled": false,
+    "rewards": [],
+    "font": "Poppins",
+    "fontColor": "#FFFFFF",
+    "backgroundColor": "#CC1A1324",
+    "cornerRadius": 12,
+    "zoom": 1,
+    "logo": "",
+    "goals": [
+      ["Subs", "50", "Cooking stream"],
+      ["Bits", "10000", "Horror game night"],
+      ["Combined", "250", "Dye hair pink"]
+    ],
+    "rotator": ["A sub adds 3 minutes!", "100 bits add 1 minute!"],
+    "chat_timeAdded": "@%user% added %addedTime% to the timer!",
+    "chat_finished": "The timer is over! We streamed for %totalTime% 💜",
+    "onlyWhenLive": true,
+    "apiToken": "",
+    "backupFile": ""
+  },
+  "states": [
+    {
+      "id": "f1",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": null,
+      "dirty": false,
+      "summary": null,
+      "text": null
+    },
+    {
+      "id": "f2",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": null,
+      "dirty": false,
+      "summary": null,
+      "text": null
+    },
+    {
+      "id": "f3",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": null,
+      "dirty": false,
+      "summary": null,
+      "text": null
+    },
+    {
+      "id": "f4",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": null,
+      "dirty": false,
+      "summary": null,
+      "text": null
+    },
+    {
+      "id": "f5",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": null,
+      "dirty": false,
+      "summary": null,
+      "text": null
+    },
+    {
+      "id": "f6",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": null,
+      "dirty": false,
+      "summary": null,
+      "text": null
+    },
+    {
+      "id": "f7",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": null,
+      "dirty": false,
+      "summary": null,
+      "text": null
+    },
+    {
+      "id": "f8",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": null,
+      "dirty": false,
+      "summary": null,
+      "text": null
+    },
+    {
+      "id": "f9",
+      "visible": false,
+      "enabled": true,
+      "error": null,
+      "display": null,
+      "dirty": false,
+      "summary": null,
+      "text": null
+    },
+    {
+      "id": "f10",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": null,
+      "dirty": false,
+      "summary": null,
+      "text": null
+    },
+    {
+      "id": "f11",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": null,
+      "dirty": false,
+      "summary": null,
+      "text": null
+    },
+    {
+      "id": "f12",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": null,
+      "dirty": false,
+      "summary": null,
+      "text": null
+    },
+    {
+      "id": "f13",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": null,
+      "dirty": false,
+      "summary": null,
+      "text": null
+    },
+    {
+      "id": "f14",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": "1h",
+      "dirty": false,
+      "summary": null,
+      "text": null
+    },
+    {
+      "id": "f15",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": null,
+      "dirty": false,
+      "summary": null,
+      "text": null
+    },
+    {
+      "id": "f16",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": null,
+      "dirty": false,
+      "summary": null,
+      "text": null
+    },
+    {
+      "id": "f17",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": "3m",
+      "dirty": false,
+      "summary": null,
+      "text": null
+    },
+    {
+      "id": "f18",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": "3m",
+      "dirty": false,
+      "summary": null,
+      "text": null
+    },
+    {
+      "id": "f19",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": "5m",
+      "dirty": false,
+      "summary": null,
+      "text": null
+    },
+    {
+      "id": "f20",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": "10m",
+      "dirty": false,
+      "summary": null,
+      "text": null
+    },
+    {
+      "id": "f21",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": null,
+      "dirty": false,
+      "summary": null,
+      "text": null
+    },
+    {
+      "id": "f22",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": null,
+      "dirty": false,
+      "summary": null,
+      "text": null
+    },
+    {
+      "id": "f23",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": "1m",
+      "dirty": false,
+      "summary": null,
+      "text": null
+    },
+    {
+      "id": "f24",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": null,
+      "dirty": false,
+      "summary": null,
+      "text": null
+    },
+    {
+      "id": "f25",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": "2m",
+      "dirty": false,
+      "summary": null,
+      "text": null
+    },
+    {
+      "id": "f26",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": null,
+      "dirty": false,
+      "summary": null,
+      "text": null
+    },
+    {
+      "id": "f27",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": null,
+      "dirty": false,
+      "summary": null,
+      "text": null
+    },
+    {
+      "id": "f28",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": null,
+      "dirty": false,
+      "summary": "None selected",
+      "text": null
+    },
+    {
+      "id": "f29",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": null,
+      "dirty": false,
+      "summary": null,
+      "text": null
+    },
+    {
+      "id": "f30",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": null,
+      "dirty": false,
+      "summary": null,
+      "text": null
+    },
+    {
+      "id": "f31",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": null,
+      "dirty": false,
+      "summary": null,
+      "text": null
+    },
+    {
+      "id": "f32",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": null,
+      "dirty": false,
+      "summary": null,
+      "text": null
+    },
+    {
+      "id": "f33",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": "12 px",
+      "dirty": false,
+      "summary": null,
+      "text": null
+    },
+    {
+      "id": "f34",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": null,
+      "dirty": false,
+      "summary": null,
+      "text": null
+    },
+    {
+      "id": "f35",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": null,
+      "dirty": false,
+      "summary": null,
+      "text": null,
+      "image": null
+    },
+    {
+      "id": "f36",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": null,
+      "dirty": false,
+      "summary": null,
+      "text": "http://localhost:7474/hype-timer"
+    },
+    {
+      "id": "f37",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": null,
+      "dirty": false,
+      "summary": null,
+      "text": null
+    },
+    {
+      "id": "f38",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": null,
+      "dirty": false,
+      "summary": "3 row(s)",
+      "text": null
+    },
+    {
+      "id": "f39",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": null,
+      "dirty": false,
+      "summary": "2 item(s)",
+      "text": null
+    },
+    {
+      "id": "f40",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": null,
+      "dirty": false,
+      "summary": null,
+      "text": null
+    },
+    {
+      "id": "f41",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": null,
+      "dirty": false,
+      "summary": null,
+      "text": null
+    },
+    {
+      "id": "f42",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": null,
+      "dirty": false,
+      "summary": null,
+      "text": null
+    },
+    {
+      "id": "f43",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": null,
+      "dirty": false,
+      "summary": null,
+      "text": null
+    },
+    {
+      "id": "f44",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": null,
+      "dirty": false,
+      "summary": null,
+      "text": null
+    },
+    {
+      "id": "f45",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": null,
+      "dirty": false,
+      "summary": null,
+      "text": null
+    },
+    {
+      "id": "f46",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": null,
+      "dirty": false,
+      "summary": null,
+      "text": null
+    },
+    {
+      "id": "f47",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": null,
+      "dirty": false,
+      "summary": null,
+      "text": null
+    },
+    {
+      "id": "f48",
+      "visible": true,
+      "enabled": true,
+      "error": null,
+      "display": null,
+      "dirty": false,
+      "summary": null,
+      "text": null
+    }
+  ],
+  "status": {
+    "dirty": false,
+    "errors": 0,
+    "text": "All changes saved",
+    "tone": "muted",
+    "canSave": true,
+    "canDiscard": false
+  }
+}

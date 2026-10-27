@@ -1,0 +1,12 @@
+{
+  "$comment": "OrchidUI theme. Load with ui.LoadThemeFile(\"themes/synthwave.json\"). Any colour left out is derived from these.",
+  "theme": {
+    "Background": "#0E0A1A",
+    "Accent": "#FF4FD8",
+    "Accent2": "#7C5CFF",
+    "Text": "#F3EEFF",
+    "Tint": 0.16,
+    "HeroStart": "#3B1C8C",
+    "HeroEnd": "#B0207F"
+  }
+}

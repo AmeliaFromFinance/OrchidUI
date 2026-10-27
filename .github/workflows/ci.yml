@@ -1,0 +1,114 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  DOTNET_NOLOGO: 'true'
+  DOTNET_CLI_TELEMETRY_OPTOUT: 'true'
+  TESTINGPLATFORM_TELEMETRY_OPTOUT: 'true'
+  AVALONIA_TELEMETRY_OPTOUT: '1'
+
+jobs:
+  windows:
+    name: Windows (OrchidUI.dll and orchid-host)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 10.0.x
+      # net481 test target exists only on Windows, so this restore may extend the test lock file.
+      - run: dotnet restore OrchidUI.slnx
+      - run: dotnet build OrchidUI.slnx -c Release --no-restore
+      - name: Shim tests on .NET Framework 4.8.1 and .NET 10
+        run: dotnet test --project tests/OrchidUI.Tests -c Release --no-build --coverage --coverage-output-format cobertura --coverage-output shim-windows.cobertura.xml
+      - name: Host tests (headless) and the shim over a real named pipe
+        run: dotnet test --project tests/OrchidUI.Host.Tests -c Release --no-build --coverage --coverage-output-format cobertura --coverage-output host-windows.cobertura.xml
+      - name: All four examples compile against the net481 DLL
+        run: |
+          foreach ($e in 'settings','runtime','minimal','customised') {
+            tools/orchid-sandbox/bin/Release/net481/orchid-sandbox.exe $e --dump > $null
+            if ($LASTEXITCODE -ne 0) { throw "$e failed" }
+          }
+      - uses: codecov/codecov-action@v5
+        with:
+          files: '**/TestResults/*.cobertura.xml'
+          flags: windows
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: false
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: windows-test-results
+          path: '**/TestResults/**'
+          retention-days: 7
+
+  linux:
+    name: Linux (host, protocol, Xvfb start)
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 10.0.x
+      - run: dotnet restore OrchidUI.slnx --locked-mode
+      - run: dotnet build OrchidUI.slnx -c Release --no-restore
+      - name: Shim, protocol and golden tests; shim and FakeHost over TCP and a Unix-socket pipe
+        run: dotnet test --project tests/OrchidUI.Tests -c Release --no-build --coverage --coverage-output-format cobertura --coverage-output shim-linux.cobertura.xml
+      - name: Host tests (headless), accessibility walk, theme snapshots, shim integration
+        run: dotnet test --project tests/OrchidUI.Host.Tests -c Release --no-build --coverage --coverage-output-format cobertura --coverage-output host-linux.cobertura.xml
+      - name: Golden files are committed and current
+        run: git diff --exit-code -- tests/fixtures tests/OrchidUI.Host.Tests/snapshots
+      - name: Smoke start under Xvfb
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq xvfb imagemagick > /dev/null
+          dotnet publish src/OrchidUI.Host -c Release -r linux-x64 --self-contained -p:DebugType=none -o dist/linux-x64
+          build/smoke.sh dist/linux-x64/orchid-host smoke-linux.png xvfb-run -a -s "-screen 0 1400x900x24"
+      - uses: codecov/codecov-action@v5
+        with:
+          files: '**/TestResults/*.cobertura.xml'
+          flags: linux
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: false
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: linux-smoke
+          path: |
+            smoke-linux.png
+            tests/OrchidUI.Host.Tests/snapshots/*.received.png
+          if-no-files-found: ignore
+          retention-days: 7
+
+  macos:
+    name: macOS (host start)
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 10.0.x
+      - run: dotnet restore OrchidUI.slnx --locked-mode
+      - run: dotnet build src/OrchidUI.Host -c Release --no-restore
+      - name: Smoke start
+        run: |
+          dotnet publish src/OrchidUI.Host -c Release -r osx-arm64 --self-contained -p:DebugType=none -o dist/osx-arm64
+          codesign --force --sign - dist/osx-arm64/orchid-host
+          build/smoke.sh dist/osx-arm64/orchid-host smoke-macos.png
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: macos-smoke
+          path: smoke-macos.png
+          if-no-files-found: ignore
+          retention-days: 7

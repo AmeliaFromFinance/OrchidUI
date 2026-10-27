@@ -1,0 +1,10 @@
+{
+  "$comment": "OrchidUI theme. Load with ui.LoadThemeFile(\"themes/orchid.json\"). Any colour left out is derived from these.",
+  "theme": {
+    "Background": "#16111D",
+    "Accent": "#F28AC9",
+    "Accent2": "#A57CDB",
+    "Text": "#F7F2FA",
+    "Tint": 0.12
+  }
+}

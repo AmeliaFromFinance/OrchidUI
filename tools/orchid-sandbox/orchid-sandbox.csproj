@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    orchid-sandbox: runs the example actions, unchanged, against a fake CPH, without
+    Streamer.bot. net481 is what runs under Wine (the nightly E2E job); net10.0 lets the tests
+    and any OS use it too.
+  -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks>net481;net10.0</TargetFrameworks>
+    <LangVersion>7.3</LangVersion>
+    <AssemblyName>orchid-sandbox</AssemblyName>
+    <RootNamespace>OrchidUI.Sandbox</RootNamespace>
+    <IsPackable>false</IsPackable>
+    <NoWarn>$(NoWarn);CA1416</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\OrchidUI\OrchidUI.csproj" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net481'">
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="OrchidUI.Tests" />
+  </ItemGroup>
+
+</Project>

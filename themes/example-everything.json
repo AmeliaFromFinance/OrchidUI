@@ -1,0 +1,54 @@
+{
+  "$comment": "Every section is optional. Unknown keys are logged and ignored. Colours: #RGB, #RRGGBB, #AARRGGBB or transparent.",
+  "preset": "Orchid",
+  "theme": {
+    "Accent": "#FF7AC8",
+    "Accent2": "#A57CDB",
+    "Background": "#140F1B",
+    "Text": "#F7F2FA",
+    "Tint": 0.12,
+    "Danger": "#FF8E9E",
+    "FontFamily": "Segoe UI Variable Text, Segoe UI, Noto Sans, Arial",
+    "FontSize": 14,
+    "SmallFontSize": 12,
+    "PageTitleSize": 28,
+    "HeadingWeight": "SemiBold",
+    "CornerRadius": 6,
+    "LargeCornerRadius": 10,
+    "Shadows": true,
+    "BackdropOpacity": 0.72
+  },
+  "window": {
+    "Width": 1100,
+    "Height": 760,
+    "Resizable": true,
+    "MinWidth": 0,
+    "MaxWidth": 1600,
+    "MaxHeight": 1200,
+    "CanMaximize": true,
+    "Topmost": false,
+    "RememberBounds": true,
+    "Scale": 1.0,
+    "Chrome": "Auto",
+    "Rendering": "Auto",
+    "Backdrop": "Auto"
+  },
+  "layout": {
+    "Navigation": "Auto",
+    "Pane": "Auto",
+    "PaneWidth": 280,
+    "Density": "Normal",
+    "ContentMaxWidth": 1000,
+    "ShowSearch": true,
+    "ShowImportExport": true,
+    "ShowResetAll": true,
+    "ShowAbout": true,
+    "AutoSave": false,
+    "Animations": true
+  },
+  "strings": {
+    "Save": "Save",
+    "SaveAndClose": "Save & close",
+    "Discard": "Discard"
+  }
+}

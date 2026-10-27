@@ -1,0 +1,1 @@
+{"enabled":true,"startingTime":"00:00:01:30","timeFormat":"hh:mm:ss","currency":"XYZ","happyHour_multiplier":0.33,"happyHour_duration":86400,"time_t1":43,"time_t1_enabled":false,"bits_minimum":1,"fontColor":"#AABBCC","backgroundColor":"#FF112233","font":"42","goals":[["Subs","5",""],["Bits","10","x"]],"legacy_key":"from 1.x"}

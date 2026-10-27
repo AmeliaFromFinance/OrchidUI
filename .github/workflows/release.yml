@@ -1,0 +1,100 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+
+env:
+  DOTNET_NOLOGO: 'true'
+  DOTNET_CLI_TELEMETRY_OPTOUT: 'true'
+  TESTINGPLATFORM_TELEMETRY_OPTOUT: 'true'
+  AVALONIA_TELEMETRY_OPTOUT: '1'
+
+jobs:
+  host:
+    name: orchid-host ${{ matrix.rid }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: true
+      matrix:
+        include:
+          - { rid: win-x64, os: windows-latest, exe: orchid-host.exe }
+          - { rid: linux-x64, os: ubuntu-24.04, exe: orchid-host }
+          - { rid: linux-arm64, os: ubuntu-24.04-arm, exe: orchid-host }
+          - { rid: osx-arm64, os: macos-14, exe: orchid-host }
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 10.0.x
+      - name: Tag matches the version
+        shell: bash
+        run: |
+          version=$(sed -n 's:.*<Version>\(.*\)</Version>.*:\1:p' Directory.Build.props)
+          test "v$version" = "$GITHUB_REF_NAME" || { echo "Tag $GITHUB_REF_NAME but Directory.Build.props says $version"; exit 1; }
+      - run: dotnet restore src/OrchidUI.Host --locked-mode
+      - name: Publish self-contained single file
+        shell: bash
+        run: dotnet publish src/OrchidUI.Host -c Release -r ${{ matrix.rid }} --self-contained -p:DebugType=none -p:ContinuousIntegrationBuild=true -o dist/${{ matrix.rid }}
+      # Ad-hoc signature: Apple Silicon refuses unsigned binaries. Not notarised (see docs/macos.md).
+      - name: Ad-hoc sign (macOS)
+        if: runner.os == 'macOS'
+        run: codesign --force --sign - dist/${{ matrix.rid }}/orchid-host
+      - name: Version check
+        shell: bash
+        run: dist/${{ matrix.rid }}/${{ matrix.exe }} --version
+      - uses: actions/upload-artifact@v4
+        with:
+          name: host-${{ matrix.rid }}
+          path: dist/${{ matrix.rid }}/${{ matrix.exe }}
+          if-no-files-found: error
+
+  package:
+    name: OrchidUI.dll and release
+    needs: host
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write # create the release
+      id-token: write # build provenance
+      attestations: write
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 10.0.x
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: host-*
+          path: dist
+      # The DLL refuses any orchid-host whose SHA-256 isn't one of the builds above.
+      - name: Trust exactly these hosts
+        run: |
+          chmod +x dist/host-linux-x64/orchid-host dist/host-linux-arm64/orchid-host dist/host-osx-arm64/orchid-host
+          build/write-host-hashes.sh dist/host-win-x64/orchid-host.exe dist/host-linux-x64/orchid-host dist/host-linux-arm64/orchid-host dist/host-osx-arm64/orchid-host
+          cat src/OrchidUI/Session/HostHashes.g.cs
+      - run: dotnet restore src/OrchidUI --locked-mode
+      - name: Build OrchidUI.dll (net481)
+        run: dotnet build src/OrchidUI -c Release -f net481 --no-restore -p:ContinuousIntegrationBuild=true
+      - name: Zip
+        run: |
+          mkdir -p out
+          cp src/OrchidUI/bin/Release/net481/OrchidUI.dll out/OrchidUI.dll
+          for rid in win-x64 linux-x64 linux-arm64 osx-arm64; do
+            (cd dist/host-$rid && zip -q -X "$GITHUB_WORKSPACE/out/orchid-host-$rid.zip" orchid-host*)
+          done
+          (cd out && sha256sum OrchidUI.dll orchid-host-*.zip > SHA256SUMS)
+          cat out/SHA256SUMS
+      - uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: |
+            out/OrchidUI.dll
+            out/orchid-host-*.zip
+      - name: Create the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          notes=$(awk -v v="${GITHUB_REF_NAME#v}" '$0 ~ "^## \\[?"v"\\]?" {f=1; next} /^## / && f {exit} f' CHANGELOG.md)
+          gh release create "$GITHUB_REF_NAME" out/* --title "OrchidUI $GITHUB_REF_NAME" --notes "$notes" --verify-tag

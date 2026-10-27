@@ -1,0 +1,67 @@
+name: Wine E2E (nightly)
+
+# Streamer.bot under Wine is the main Linux use. This runs the net481 sandbox under Wine Mono,
+# lets it launch the Linux orchid-host through `start /unix`, then tries `orchid-host --watch`.
+# Wine versions differ in what they break, so this job may fail without blocking anything.
+
+on:
+  schedule:
+    - cron: '17 3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  DOTNET_NOLOGO: 'true'
+  DOTNET_CLI_TELEMETRY_OPTOUT: 'true'
+  AVALONIA_TELEMETRY_OPTOUT: '1'
+
+jobs:
+  wine:
+    runs-on: ubuntu-24.04
+    continue-on-error: true
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 10.0.x
+      - name: Install Wine and Xvfb
+        run: |
+          sudo dpkg --add-architecture i386
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq wine64 wine32 xvfb imagemagick > /dev/null
+          wine --version
+      # Ubuntu 24.04 ships Wine 9.0, which pairs with Wine Mono 8.1 (runs the net481 sandbox).
+      - name: Wine prefix with Wine Mono
+        env:
+          WINEDEBUG: -all
+        run: |
+          curl -sSLo "$RUNNER_TEMP/wine-mono.msi" https://github.com/wine-mono/wine-mono/releases/download/wine-mono-8.1.0/wine-mono-8.1.0-x86.msi
+          xvfb-run -a wineboot -i
+          xvfb-run -a wine msiexec /i "$RUNNER_TEMP/wine-mono.msi" /qn
+          wineserver -w
+      - name: Build
+        run: |
+          dotnet build tools/orchid-sandbox -c Release -f net481
+          dotnet publish src/OrchidUI.Host -c Release -r linux-x64 --self-contained -p:DebugType=none -o dist/linux-x64
+      - name: start /unix launches the host
+        env:
+          WINEDEBUG: -all
+          ORCHIDUI_HOST: Z:${{ github.workspace }}/dist/linux-x64/orchid-host
+        run: build/wine-e2e.sh launch wine-launch.png
+      - name: orchid-host --watch picks the window up
+        env:
+          WINEDEBUG: -all
+          ORCHIDUI_NO_LAUNCH: '1'
+        run: build/wine-e2e.sh watch wine-watch.png
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: wine-e2e
+          path: |
+            wine-*.png
+            wine-*.log
+          if-no-files-found: ignore
+          retention-days: 14

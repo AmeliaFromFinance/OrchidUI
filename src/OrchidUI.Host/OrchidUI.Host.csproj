@@ -1,0 +1,51 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- orchid-host: draws OrchidUI windows natively. Self-contained single file per OS on release. -->
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>orchid-host</AssemblyName>
+    <RootNamespace>OrchidUI.Host</RootNamespace>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <IsPackable>false</IsPackable>
+    <EnableDefaultAvaloniaItems>true</EnableDefaultAvaloniaItems>
+    <!-- The shared protocol source is C# 7.3 style; don't apply nullable analysis to it. -->
+    <NoWarn>$(NoWarn);CS8632</NoWarn>
+    <DefineConstants>$(DefineConstants);ORCHID_HOST</DefineConstants>
+  </PropertyGroup>
+
+  <!-- Release builds: a self-contained publish for a runtime gives one orchid-host file per OS.
+       Listing the runtimes here keeps packages.lock.json the same for every build. -->
+  <PropertyGroup>
+    <RuntimeIdentifiers>win-x64;linux-x64;linux-arm64;osx-arm64</RuntimeIdentifiers>
+    <PublishSingleFile>true</PublishSingleFile>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+    <!-- PublishSingleFile turns on the single-file analyzer from Microsoft.NET.ILLink.Tasks, whose version and bytes
+         depend on the installed SDK (Microsoft's and distro builds differ), so packages.lock.json would only restore on
+         one machine (NU1403, or NU1004 after an SDK update). Nothing is trimmed, so it isn't needed. -->
+    <EnableSingleFileAnalyzer>false</EnableSingleFileAnalyzer>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\OrchidUI.Protocol\*.cs" Link="Protocol\%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" />
+    <PackageReference Include="Avalonia.Desktop" />
+    <PackageReference Include="Avalonia.Themes.Fluent" />
+    <PackageReference Include="Avalonia.Fonts.Inter" />
+    <PackageReference Include="Avalonia.Controls.ColorPicker" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="OrchidUI.Host.Tests" />
+  </ItemGroup>
+
+</Project>

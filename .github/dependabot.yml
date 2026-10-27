@@ -1,0 +1,18 @@
+version: 2
+updates:
+  - package-ecosystem: nuget
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      avalonia:
+        patterns: ['Avalonia*']
+      tests:
+        patterns: ['xunit*', 'FsCheck*', 'Microsoft.Testing.*']
+    ignore:
+      # Avalonia.Headless.XUnit pins the host tests to xunit.v3 3.x until it moves to 4.x.
+      - dependency-name: xunit.v3.mtp-v2
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

@@ -1,0 +1,12 @@
+OrchidUI
+Copyright (c) 2026 AmeliaFromFinance and OrchidUI contributors. MIT licence (see LICENSE).
+
+Release builds of orchid-host are self-contained and include:
+
+- Avalonia (MIT) - https://github.com/AvaloniaUI/Avalonia
+- SkiaSharp and HarfBuzzSharp (MIT) - https://github.com/mono/SkiaSharp
+- Skia (BSD-3-Clause) and HarfBuzz (MIT, "Old MIT") as native libraries of the above
+- Inter typeface (SIL Open Font License 1.1), through Avalonia.Fonts.Inter - https://rsms.me/inter/
+- The .NET runtime and libraries (MIT) - https://github.com/dotnet/runtime
+
+OrchidUI.dll has no third-party dependencies.

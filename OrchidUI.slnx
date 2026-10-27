@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/OrchidUI/OrchidUI.csproj" />
+    <Project Path="src/OrchidUI.Host/OrchidUI.Host.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/OrchidUI.Tests/OrchidUI.Tests.csproj" />
+    <Project Path="tests/OrchidUI.Host.Tests/OrchidUI.Host.Tests.csproj" />
+  </Folder>
+  <Folder Name="/tools/">
+    <Project Path="tools/orchid-sandbox/orchid-sandbox.csproj" />
+  </Folder>
+</Solution>
