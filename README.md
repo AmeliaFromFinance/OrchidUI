@@ -2,7 +2,7 @@
 
 Settings windows for Streamer.bot C# actions, drawn natively on Windows, Linux and macOS.
 
-![OrchidUI in the Sakura theme: changing settings, a field appearing when a switch turns on, sliders, a multi-select, a table, a required field turning red, searching, and saving](docs/showcase.gif)
+![OrchidUI in the Orchid theme: changing settings, a field appearing when a switch turns on, sliders, a multi-select, a table, a required field turning red, searching, and saving](docs/showcase.gif)
 
 [![build](https://img.shields.io/github/actions/workflow/status/AmeliaFromFinance/OrchidUI/release.yml?label=build)](https://github.com/AmeliaFromFinance/OrchidUI/actions/workflows/release.yml)
 [![tests](https://img.shields.io/github/actions/workflow/status/AmeliaFromFinance/OrchidUI/ci.yml?branch=main&label=tests)](https://github.com/AmeliaFromFinance/OrchidUI/actions/workflows/ci.yml)
