@@ -65,7 +65,7 @@ jobs:
       - uses: actions/setup-dotnet@v6
         with:
           dotnet-version: 10.0.x
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           pattern: host-*
           path: dist
@@ -97,4 +97,4 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           notes=$(awk -v v="${GITHUB_REF_NAME#v}" '$0 ~ "^## \\[?"v"\\]?" {f=1; next} /^## / && f {exit} f' CHANGELOG.md)
-          gh release create "$GITHUB_REF_NAME" out/* --title "OrchidUI $GITHUB_REF_NAME" --notes "$notes" --verify-tag
+          gh release create "$GITHUB_REF_NAME" out/* --title "OrchidUI $GITHUB_REF_NAME" --notes "$notes" --verify-tag --draft

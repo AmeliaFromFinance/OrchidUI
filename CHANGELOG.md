@@ -2,7 +2,7 @@
 
 All notable changes to OrchidUI are recorded here. Versions follow [Semantic Versioning](https://semver.org/).
 
-## 1.0.0 (unreleased)
+## 1.0.0 (2026-10-28)
 
 First release.
 
