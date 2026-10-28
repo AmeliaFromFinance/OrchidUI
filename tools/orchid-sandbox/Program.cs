@@ -9,6 +9,7 @@ namespace OrchidUI.Sandbox
     {
         private const string Usage = @"orchid-sandbox: runs an OrchidUI example action with a fake CPH.
 
+  orchid-sandbox <example> --compile         check it compiles against this OrchidUI.dll
   orchid-sandbox <example> --dump            print the WindowSpec JSON it would send
   orchid-sandbox <example> [--store F.json]  open it for real (needs orchid-host; set ORCHIDUI_HOST)
 
@@ -18,12 +19,13 @@ Examples: settings, runtime, minimal, customised (or part of a file name in exam
         public static int Main(string[] args)
         {
             string name = null, store = null, examples = null;
-            bool dump = false;
+            bool dump = false, compileOnly = false;
             for (int i = 0; i < args.Length; i++)
             {
                 switch (args[i])
                 {
                     case "--dump": dump = true; break;
+                    case "--compile": compileOnly = true; break;
                     case "--store": store = i + 1 < args.Length ? args[++i] : null; break;
                     case "--examples": examples = i + 1 < args.Length ? args[++i] : null; break;
                     case "-h":
@@ -34,6 +36,15 @@ Examples: settings, runtime, minimal, customised (or part of a file name in exam
             if (name == null) { Console.WriteLine(Usage); return 64; }
             examples = examples ?? FindExamples();
             if (examples == null) { Console.Error.WriteLine("Couldn't find the examples folder; pass --examples."); return 66; }
+
+            if (compileOnly)
+            {
+                var source = ExampleRunner.FileFor(examples, name);
+                try { ExampleRunner.Compile(source); }
+                catch (InvalidOperationException ex) { Console.Error.WriteLine(ex.Message); return 1; }
+                Console.WriteLine(Path.GetFileName(source) + " compiles.");
+                return 0;
+            }
 
             var cph = new FakeCph(store) { EchoToConsole = !dump };
             if (!dump)

@@ -37,7 +37,7 @@ jobs:
       - name: All four examples compile against the net481 DLL
         run: |
           foreach ($e in 'settings','runtime','minimal','customised') {
-            tools/orchid-sandbox/bin/Release/net481/orchid-sandbox.exe $e --dump > $null
+            tools/orchid-sandbox/bin/Release/net481/orchid-sandbox.exe $e --compile
             if ($LASTEXITCODE -ne 0) { throw "$e failed" }
           }
       - uses: codecov/codecov-action@v5
