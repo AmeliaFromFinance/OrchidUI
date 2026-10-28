@@ -115,7 +115,7 @@ namespace OrchidUI.Tests
                 var png = BigPng(Path.Combine(dir, "#2"), "logo%41.png", 1024);
                 string problem;
                 Assert.Equal(png, WindowController.UserFilePath(png, out problem));
-                Assert.Equal(png, WindowController.UserFilePath("file://" + string.Join("/", png.Split('/').Select(Uri.EscapeDataString)), out problem));
+                Assert.Equal(png, WindowController.UserFilePath(FileUrl(png), out problem));
                 using (var host = FakeHost.Start("tcp", o => o.Tab("Look").AddImageInput("Logo", "", "logo")).Open())
                 {
                     host.Change("logo", png);
@@ -123,6 +123,15 @@ namespace OrchidUI.Tests
                 }
             }
             finally { Directory.Delete(dir, true); }
+        }
+
+        // file:///tmp/x/%232/logo%2541.png, or file:///C:/x/%232/logo%2541.png on Windows.
+        private static string FileUrl(string path)
+        {
+            var parts = path.Split(Path.DirectorySeparatorChar);
+            var escaped = parts.Select((s, i) => i == 0 && s.EndsWith(":", StringComparison.Ordinal) ? s : Uri.EscapeDataString(s));
+            var url = string.Join("/", escaped);
+            return url.StartsWith("/", StringComparison.Ordinal) ? "file://" + url : "file:///" + url;
         }
 
         [Fact]

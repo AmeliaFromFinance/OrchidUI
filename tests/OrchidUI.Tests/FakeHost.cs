@@ -68,7 +68,9 @@ namespace OrchidUI.Tests
             var transport = Json.Str(SessionFile, "transport");
             if (transport == "pipe")
             {
-                var pipe = new NamedPipeClientStream(".", Json.Str(SessionFile, "pipe"), PipeDirection.InOut);
+                // Asynchronous like the real host: on Windows a synchronous pipe handle runs one read or
+                // write at a time, so the hello would wait behind the reader thread's pending read.
+                var pipe = new NamedPipeClientStream(".", Json.Str(SessionFile, "pipe"), PipeDirection.InOut, PipeOptions.Asynchronous);
                 pipe.Connect(5000);
                 _stream = pipe;
                 _close = pipe.Dispose;

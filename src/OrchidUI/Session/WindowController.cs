@@ -493,8 +493,14 @@ namespace OrchidUI
                 p = uri.LocalPath;
             }
             if (p.Length == 0) { problem = "is empty"; return null; }
-            if (IsShareOrDevice(p)) { problem = "is on a network share or a device, which isn't read"; return null; }
-            string full = Path.GetFullPath(Path.IsPathRooted(p) ? p : Path.Combine(Orchid.StreamerBotDirectory, p));
+            if (IsShareOrDevice(p) || IsUnixSystemPath(p)) { problem = "is on a network share or a device, which isn't read"; return null; }
+            string full;
+            try { full = Path.GetFullPath(Path.IsPathRooted(p) ? p : Path.Combine(Orchid.StreamerBotDirectory, p)); }
+            catch (Exception ex) when (ex is ArgumentException || ex is NotSupportedException || ex is PathTooLongException)
+            {
+                problem = "isn't a valid path";
+                return null;
+            }
             if (IsShareOrDevice(full) || IsUnixSystemPath(full)) { problem = "is on a network share or a device, which isn't read"; return null; }
             var info = new FileInfo(full);
             if (!info.Exists) { problem = Directory.Exists(full) ? "is a folder" : "not found"; return null; }
@@ -512,10 +518,11 @@ namespace OrchidUI
                 || p.StartsWith(@"\/", StringComparison.Ordinal) || p.StartsWith(@"/\", StringComparison.Ordinal);
         }
 
-        // /dev, /proc and /sys, directly (a Unix path) or through Wine's Z: drive.
-        private static bool IsUnixSystemPath(string full)
+        // /dev, /proc and /sys, directly (a Unix path) or through Wine's Z: drive. Also checked before
+        // GetFullPath, which on Windows turns /dev/zero into a path on the current drive.
+        private static bool IsUnixSystemPath(string path)
         {
-            var p = full.Replace('\\', '/').ToLowerInvariant();
+            var p = path.Replace('\\', '/').ToLowerInvariant();
             if (p.StartsWith("z:", StringComparison.Ordinal)) p = p.Substring(2);
             return p.StartsWith("/dev/", StringComparison.Ordinal) || p.StartsWith("/proc/", StringComparison.Ordinal)
                 || p.StartsWith("/sys/", StringComparison.Ordinal);
@@ -965,7 +972,7 @@ namespace OrchidUI
         internal static string ExportPath(string path)
         {
             var p = path.Trim();
-            if (!Path.IsPathRooted(p) || IsShareOrDevice(p)) throw new IOException("Exports go to a full path on a local disk: " + p);
+            if (!Path.IsPathRooted(p) || IsShareOrDevice(p) || IsUnixSystemPath(p)) throw new IOException("Exports go to a full path on a local disk: " + p);
             if (!string.Equals(Path.GetExtension(p), ".json", StringComparison.OrdinalIgnoreCase)) p += ".json";
             p = Path.GetFullPath(p);
             if (IsShareOrDevice(p) || IsUnixSystemPath(p)) throw new IOException("Exports go to a full path on a local disk: " + p);
