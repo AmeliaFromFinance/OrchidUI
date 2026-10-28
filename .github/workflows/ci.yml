@@ -40,7 +40,7 @@ jobs:
             tools/orchid-sandbox/bin/Release/net481/orchid-sandbox.exe $e --compile
             if ($LASTEXITCODE -ne 0) { throw "$e failed" }
           }
-      - uses: codecov/codecov-action@v5
+      - uses: codecov/codecov-action@v7
         with:
           files: '**/TestResults/*.cobertura.xml'
           flags: windows
@@ -74,7 +74,7 @@ jobs:
           sudo apt-get update -qq && sudo apt-get install -y -qq xvfb imagemagick > /dev/null
           dotnet publish src/OrchidUI.Host -c Release -r linux-x64 --self-contained -p:DebugType=none -o dist/linux-x64
           build/smoke.sh dist/linux-x64/orchid-host smoke-linux.png xvfb-run -a -s "-screen 0 1400x900x24"
-      - uses: codecov/codecov-action@v5
+      - uses: codecov/codecov-action@v7
         with:
           files: '**/TestResults/*.cobertura.xml'
           flags: linux
