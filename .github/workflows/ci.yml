@@ -46,7 +46,7 @@ jobs:
           flags: windows
           token: ${{ secrets.CODECOV_TOKEN }}
           fail_ci_if_error: false
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: failure()
         with:
           name: windows-test-results
@@ -80,7 +80,7 @@ jobs:
           flags: linux
           token: ${{ secrets.CODECOV_TOKEN }}
           fail_ci_if_error: false
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: linux-smoke
@@ -105,7 +105,7 @@ jobs:
           dotnet publish src/OrchidUI.Host -c Release -r osx-arm64 --self-contained -p:DebugType=none -o dist/osx-arm64
           codesign --force --sign - dist/osx-arm64/orchid-host
           build/smoke.sh dist/osx-arm64/orchid-host smoke-macos.png
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: macos-smoke
