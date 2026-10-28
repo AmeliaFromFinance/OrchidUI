@@ -87,7 +87,7 @@ jobs:
           done
           (cd out && sha256sum OrchidUI.dll orchid-host-*.zip > SHA256SUMS)
           cat out/SHA256SUMS
-      - uses: actions/attest-build-provenance@v2
+      - uses: actions/attest-build-provenance@v4
         with:
           subject-path: |
             out/OrchidUI.dll
