@@ -24,7 +24,7 @@ jobs:
           - { rid: win-x64, os: windows-latest, exe: orchid-host.exe }
           - { rid: linux-x64, os: ubuntu-24.04, exe: orchid-host }
           - { rid: linux-arm64, os: ubuntu-24.04-arm, exe: orchid-host }
-          - { rid: osx-arm64, os: macos-14, exe: orchid-host }
+          - { rid: osx-arm64, os: macos-15, exe: orchid-host }
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-dotnet@v6
