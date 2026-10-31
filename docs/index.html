@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Docs · OrchidUI</title>
+<meta name="description" content="OrchidUI documentation: customisation, Linux and macOS setup, building and the host protocol.">
+<meta property="og:title" content="OrchidUI docs">
+<meta property="og:description" content="Customisation, Linux and macOS setup, building and the host protocol.">
+<meta property="og:image" content="https://orchid.sinist3r.lol/img/og.jpg">
+<meta property="og:url" content="https://orchid.sinist3r.lol/docs/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0d0a0f">
+<link rel="icon" href="../favicon.png">
+<link rel="icon" type="image/svg+xml" href="../img/logo.svg">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&family=Roboto+Mono:wght@500&display=swap">
+<style>
+  :root {
+    color-scheme: dark;
+    --page: #0d0a0f; --card: #16121a; --card-2: #1c1720; --line: rgba(255, 255, 255, .08);
+    --text: #f7f0f5; --muted: #b4a9b3; --faint: #85798a;
+    --accent: #f28ac9; --accent-hover: #f6a8d7; --on-accent: #2b1130; --accent-soft: rgba(242, 138, 201, .12);
+    --font: Roboto, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+    --mono: "Roboto Mono", ui-monospace, Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+  body { margin: 0; background: var(--page); color: var(--text); font: 16px/1.6 var(--font); -webkit-font-smoothing: antialiased; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  img, video { max-width: 100%; height: auto; }
+  .wrap { width: min(1240px, 100% - 40px); margin-inline: auto; }
+
+  header { position: sticky; top: 0; z-index: 10; background: rgba(13, 10, 15, .75); backdrop-filter: blur(18px) saturate(1.4); -webkit-backdrop-filter: blur(18px) saturate(1.4); border-bottom: 1px solid var(--line); }
+  header .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .brand { display: flex; align-items: center; gap: 10px; color: var(--text); font-weight: 650; font-size: 17px; }
+  .brand:hover { text-decoration: none; }
+  .brand img { width: 30px; height: 30px; border-radius: 8px; }
+  .brand small { color: var(--faint); font-weight: 500; font-size: 15px; }
+  nav { display: flex; gap: 22px; font-size: 14px; }
+  nav a { color: var(--muted); }
+  nav a:hover, nav a[aria-current] { color: var(--text); text-decoration: none; }
+
+  .layout { display: grid; grid-template-columns: 220px minmax(0, 1fr) 200px; gap: 48px; align-items: start; padding: 40px 0 80px; }
+
+  .side { position: sticky; top: 92px; max-height: calc(100vh - 110px); overflow-y: auto; }
+  .side h4 { margin: 0 0 8px; padding-left: 12px; color: var(--faint); font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+  .side ul { margin: 0 0 26px; padding: 0; list-style: none; }
+  .side a { position: relative; display: block; padding: 6px 12px; border-radius: 8px; color: var(--muted); font-size: 14.5px; }
+  .side a:hover { background: rgba(255, 255, 255, .04); color: var(--text); text-decoration: none; }
+  .side a[aria-current] { background: var(--accent-soft); color: var(--text); font-weight: 500; }
+  .side a[aria-current]::before { content: ''; position: absolute; left: 0; top: 9px; bottom: 9px; width: 3px; border-radius: 2px; background: var(--accent); }
+
+  .toc { position: sticky; top: 92px; font-size: 13.5px; }
+  .toc h4 { margin: 0 0 10px; color: var(--faint); font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+  .toc ul { margin: 0; padding: 0; list-style: none; border-left: 1px solid var(--line); }
+  .toc a { display: block; margin-left: -1px; padding: 4px 0 4px 14px; border-left: 2px solid transparent; color: var(--faint); line-height: 1.4; }
+  .toc a.sub { padding-left: 26px; }
+  .toc a:hover { color: var(--text); text-decoration: none; }
+  .toc a.on { color: var(--accent); border-left-color: var(--accent); }
+  .toc .edit { display: inline-flex; align-items: center; gap: 6px; margin-top: 20px; color: var(--muted); }
+  .toc .edit svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+  .layout > main, .doc { min-width: 0; }
+  .doc video { width: 100%; }
+  .doc > :first-child { margin-top: 0; }
+  .doc h1 { margin: 0 0 18px; font-size: clamp(32px, 4.5vw, 44px); line-height: 1.1; letter-spacing: -.03em; }
+  .doc h2 { margin: 52px 0 14px; padding-top: 4px; font-size: 26px; line-height: 1.2; letter-spacing: -.02em; }
+  .doc h3 { margin: 34px 0 10px; font-size: 19px; line-height: 1.3; }
+  .doc h4 { margin: 26px 0 8px; font-size: 16px; }
+  .doc :is(h2, h3, h4) .anchor { margin-left: 8px; color: var(--faint); opacity: 0; font-weight: 400; }
+  .doc :is(h2, h3, h4):hover .anchor { opacity: 1; text-decoration: none; }
+  .doc p, .doc li { color: #ddd2db; }
+  .doc p { margin: 0 0 16px; }
+  .doc ul, .doc ol { margin: 0 0 16px; padding-left: 24px; }
+  .doc li { margin: 4px 0; }
+  .doc li::marker { color: var(--faint); }
+  .doc strong { color: var(--text); }
+  .doc hr { margin: 36px 0; border: 0; border-top: 1px solid var(--line); }
+  .doc img, .doc video { display: block; margin: 8px 0 20px; border-radius: 12px; border: 1px solid var(--line); }
+  .doc p > a > img, .doc p > img[src*="shields.io"] { display: inline-block; margin: 0 4px 0 0; border: 0; border-radius: 0; vertical-align: middle; }
+  .doc blockquote { margin: 0 0 18px; padding: 12px 18px; border-left: 3px solid var(--accent); border-radius: 0 10px 10px 0; background: var(--accent-soft); }
+  .doc blockquote p:last-child { margin: 0; }
+  .doc :not(pre) > code { padding: 1px 6px; border-radius: 5px; background: var(--accent-soft); color: var(--accent); font: 500 .88em var(--mono); overflow-wrap: anywhere; }
+
+  .doc .table { margin: 0 0 20px; border-radius: 12px; border: 1px solid var(--line); background: var(--card); overflow-x: auto; }
+  .doc table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+  .doc th { padding: 11px 16px; border-bottom: 1px solid var(--line); background: var(--card-2); color: var(--text); font-weight: 600; text-align: left; white-space: nowrap; }
+  .doc td { padding: 11px 16px; border-top: 1px solid var(--line); color: #ddd2db; vertical-align: top; }
+  .doc tr:first-child td { border-top: 0; }
+
+  .doc .code { position: relative; margin: 0 0 20px; border-radius: 12px; border: 1px solid var(--line); background: var(--card); }
+  .doc pre { margin: 0; padding: 16px 18px; overflow-x: auto; font: 500 13.5px/1.65 var(--mono); color: #e9dfe7; tab-size: 4; }
+  .doc pre code { font: inherit; background: none; padding: 0; color: inherit; }
+  .copy { position: absolute; top: 8px; right: 8px; display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 10px; border: 0; border-radius: 7px; background: rgba(255, 255, 255, .06); color: var(--muted); font: 500 12.5px var(--font); cursor: pointer; opacity: 0; transition: opacity .15s; }
+  .code:hover .copy, .copy:focus-visible { opacity: 1; }
+  .copy:hover { background: rgba(255, 255, 255, .1); color: var(--text); }
+  .hljs-keyword, .hljs-built_in, .hljs-literal, .hljs-meta .hljs-keyword { color: #c9a8ff; }
+  .hljs-type, .hljs-title.class_, .hljs-title { color: #9fd3f5; }
+  .hljs-title.function_ { color: #f0e2ee; font-weight: 600; }
+  .hljs-string, .hljs-attr, .hljs-symbol { color: #f7b2d9; }
+  .hljs-number { color: #ffd6a5; }
+  .hljs-comment, .hljs-meta { color: var(--faint); }
+  .hljs-variable, .hljs-template-variable, .hljs-subst { color: #ffd6e7; }
+
+  .pager { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 56px; }
+  .pager a { display: block; padding: 16px 18px; border-radius: 12px; border: 1px solid var(--line); background: var(--card); color: var(--text); }
+  .pager a:hover { border-color: rgba(242, 138, 201, .4); text-decoration: none; }
+  .pager small { display: block; color: var(--faint); font-size: 12.5px; }
+  .pager .next { grid-column: 2; text-align: right; }
+
+  .status { padding: 28px; border-radius: 14px; border: 1px solid var(--line); background: var(--card); color: var(--muted); }
+  .skeleton span { display: block; height: 14px; margin: 14px 0; border-radius: 6px; background: linear-gradient(90deg, var(--card) 0%, var(--card-2) 50%, var(--card) 100%); background-size: 200% 100%; animation: shimmer 1.2s infinite linear; }
+  .skeleton span:first-child { width: 45%; height: 34px; margin-bottom: 26px; }
+  .skeleton span:nth-child(3) { width: 82%; } .skeleton span:nth-child(5) { width: 64%; }
+  @keyframes shimmer { to { background-position: -200% 0; } }
+
+  .picker { display: none; }
+
+  footer { padding: 36px 0 48px; border-top: 1px solid var(--line); color: var(--faint); font-size: 13.5px; }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+  footer a { color: var(--muted); }
+
+  @media (max-width: 1100px) {
+    .layout { grid-template-columns: 200px minmax(0, 1fr); gap: 36px; }
+    .toc { display: none; }
+  }
+  @media (max-width: 760px) {
+    nav { display: none; }
+    .layout { grid-template-columns: 1fr; gap: 20px; padding-top: 24px; }
+    .side { display: none; }
+    .picker { display: block; margin-bottom: 24px; width: 100%; height: 44px; padding: 0 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); color: var(--text); font: 500 15px var(--font); }
+    .pager { grid-template-columns: 1fr; }
+    .pager .next { grid-column: 1; }
+  }
+  @media (min-width: 1800px) { html { zoom: 1.12; } }
+  @media (min-width: 2200px) { html { zoom: 1.25; } }
+  @media (min-width: 2500px) { html { zoom: 1.35; } }
+  @media (min-width: 3200px) { html { zoom: 1.7; } }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .skeleton span { animation: none; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="../"><img src="../img/icon.png" alt="">OrchidUI <small>docs</small></a>
+    <nav>
+      <a href="../#features">Features</a>
+      <a href="../#install">Install</a>
+      <a href="../#themes">Themes</a>
+      <a href="./" aria-current="page">Docs</a>
+      <a href="https://github.com/AmeliaFromFinance/OrchidUI">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap layout">
+  <aside class="side" aria-label="Documents"></aside>
+  <main>
+    <select class="picker" aria-label="Choose a document"></select>
+    <article class="doc" aria-live="polite">
+      <div class="skeleton" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+    </article>
+  </main>
+  <aside class="toc" aria-label="On this page"></aside>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>OrchidUI by ame.owo · See also <a href="https://rainbark.sinist3r.lol">Rainbark</a> and <a href="https://pronouns.sinist3r.lol">Pronoun Tags</a></span>
+    <span><a href="https://github.com/AmeliaFromFinance/OrchidUI">Source</a> · <a href="https://github.com/AmeliaFromFinance/OrchidUI/issues">Report a problem</a></span>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Pages are read live from the repo's main branch, so edits to docs/*.md show up here without a rebuild.
+  const REPO = 'AmeliaFromFinance/OrchidUI';
+  const BRANCH = 'main';
+  const RAW = `https://raw.githubusercontent.com/${REPO}/${BRANCH}/`;
+  const BLOB = `https://github.com/${REPO}/blob/${BRANCH}/`;
+  const TREE = `https://github.com/${REPO}/tree/${BRANCH}/`;
+
+  // Known pages, in reading order. Any other .md in docs/ is picked up from the GitHub API and added at the end.
+  const KNOWN = [
+    { id: 'readme', path: 'README.md', title: 'Overview', group: 'Guides' },
+    { id: 'customisation', title: 'Customisation', group: 'Guides' },
+    { id: 'linux', title: 'Linux', group: 'Guides' },
+    { id: 'macos', title: 'macOS', group: 'Guides' },
+    { id: 'building', title: 'Building', group: 'Contributing' },
+    { id: 'protocol', title: 'Protocol', group: 'Contributing' },
+    { id: 'release-checklist', title: 'Release checklist', group: 'Contributing' },
+  ];
+  let pages = KNOWN.map(p => ({ path: `docs/${p.id}.md`, ...p }));
+
+  const side = document.querySelector('.side');
+  const toc = document.querySelector('.toc');
+  const doc = document.querySelector('.doc');
+  const picker = document.querySelector('.picker');
+  const cache = new Map();
+
+  const titleCase = s => s.replace(/[-_]+/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+  const current = () => new URLSearchParams(location.search).get('p') || 'readme';
+  const pageUrl = (id, hash) => `?p=${encodeURIComponent(id)}${hash ? '#' + hash : ''}`;
+
+  async function discover() {
+    try {
+      const res = await fetch(`https://api.github.com/repos/${REPO}/contents/docs?ref=${BRANCH}`);
+      if (!res.ok) return;
+      const files = (await res.json()).filter(f => f.type === 'file' && f.name.endsWith('.md'));
+      const live = new Set(files.map(f => f.name.slice(0, -3)));
+      pages = pages.filter(p => p.id === 'readme' || live.has(p.id));
+      for (const f of files) {
+        const id = f.name.slice(0, -3);
+        if (!pages.some(p => p.id === id)) pages.push({ id, path: `docs/${f.name}`, title: titleCase(id), group: 'Guides' });
+      }
+    } catch { /* offline or rate-limited: keep the known list */ }
+  }
+
+  function renderNav() {
+    const id = current();
+    const groups = [...new Set(pages.map(p => p.group))];
+    side.innerHTML = groups.map(g => `<h4>${g}</h4><ul>${pages.filter(p => p.group === g)
+      .map(p => `<li><a href="${pageUrl(p.id)}" data-id="${p.id}"${p.id === id ? ' aria-current="page"' : ''}>${p.title}</a></li>`).join('')}</ul>`).join('');
+    picker.innerHTML = groups.map(g => `<optgroup label="${g}">${pages.filter(p => p.group === g)
+      .map(p => `<option value="${p.id}"${p.id === id ? ' selected' : ''}>${p.title}</option>`).join('')}</optgroup>`).join('');
+  }
+
+  // GitHub's heading ids, so links like linux.md#session-folder keep working.
+  function slugger() {
+    const seen = new Map();
+    return text => {
+      let base = text.trim().toLowerCase().replace(/[^\p{L}\p{N}\s_-]/gu, '').replace(/\s/g, '-');
+      const n = seen.get(base) || 0;
+      seen.set(base, n + 1);
+      return n ? `${base}-${n}` : base;
+    };
+  }
+
+  // Resolve a link relative to the page's own folder, the way GitHub does.
+  function resolve(href, page) {
+    const base = page.path.includes('/') ? page.path.slice(0, page.path.lastIndexOf('/') + 1) : '';
+    const url = new URL(href, 'https://x/' + base);
+    return { path: url.pathname.slice(1), hash: url.hash.slice(1) };
+  }
+
+  function fixLinks(page, root) {
+    root.querySelectorAll('a[href]').forEach(a => {
+      const href = a.getAttribute('href');
+      if (/^[a-z]+:/i.test(href) || href.startsWith('//')) { a.rel = 'noopener'; return; }
+      if (href.startsWith('#')) return;
+      const { path, hash } = resolve(href, page);
+      const target = pages.find(p => p.path.toLowerCase() === path.toLowerCase());
+      if (target) a.href = pageUrl(target.id, hash);
+      else a.href = (path.endsWith('/') ? TREE : BLOB) + path + (hash ? '#' + hash : '');
+    });
+    root.querySelectorAll('img[src]').forEach(img => {
+      const src = img.getAttribute('src');
+      if (/^[a-z]+:/i.test(src)) return;
+      const { path } = resolve(src, page);
+      if (path === 'docs/showcase.gif') {
+        // The site already has this recording as a much smaller video.
+        const v = Object.assign(document.createElement('video'), { src: '../img/showcase.mp4', poster: '../img/showcase.jpg', muted: true, loop: true, playsInline: true });
+        v.setAttribute('aria-label', img.alt);
+        v.width = 1000; v.height = 655;
+        if (!matchMedia('(prefers-reduced-motion: reduce)').matches) v.autoplay = true; else v.controls = true;
+        img.replaceWith(v);
+      } else img.src = RAW + path;
+    });
+  }
+
+  function decorate() {
+    const slug = slugger();
+    doc.querySelectorAll('h1, h2, h3, h4').forEach(h => {
+      h.dataset.title = h.textContent.trim();
+      h.id = slug(h.dataset.title);
+      if (h.tagName !== 'H1') h.insertAdjacentHTML('beforeend', `<a class="anchor" href="#${h.id}" aria-label="Link to this section">#</a>`);
+    });
+    doc.querySelectorAll('table').forEach(t => {
+      const box = document.createElement('div');
+      box.className = 'table';
+      t.replaceWith(box);
+      box.append(t);
+    });
+    doc.querySelectorAll('pre').forEach(pre => {
+      const box = document.createElement('div');
+      box.className = 'code';
+      pre.replaceWith(box);
+      box.append(pre);
+      const code = pre.querySelector('code');
+      if (code && window.hljs) {
+        const lang = (code.className.match(/language-(\w+)/) || [])[1];
+        if (lang && hljs.getLanguage(lang)) hljs.highlightElement(code);
+      }
+      const btn = Object.assign(document.createElement('button'), { className: 'copy', type: 'button', textContent: 'Copy' });
+      btn.addEventListener('click', async () => {
+        try { await navigator.clipboard.writeText(pre.innerText); btn.textContent = 'Copied'; }
+        catch { btn.textContent = 'Press Ctrl+C'; }
+        setTimeout(() => { btn.textContent = 'Copy'; }, 1600);
+      });
+      box.append(btn);
+    });
+  }
+
+  let spy;
+  function renderToc(page) {
+    const heads = [...doc.querySelectorAll('h2, h3')];
+    toc.innerHTML = (heads.length > 1 ? `<h4>On this page</h4><ul>${heads.map(h =>
+      `<li><a href="#${h.id}"${h.tagName === 'H3' ? ' class="sub"' : ''}>${h.dataset.title}</a></li>`).join('')}</ul>` : '')
+      + `<a class="edit" href="${BLOB}${page.path}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 4.5 19.5 8.5 8.5 19.5H4.5V15.5Z"/></svg>Edit on GitHub</a>`;
+    if (spy) spy.disconnect();
+    const links = new Map([...toc.querySelectorAll('a[href^="#"]')].map(a => [a.getAttribute('href').slice(1), a]));
+    spy = new IntersectionObserver(entries => {
+      for (const e of entries) if (e.isIntersecting) {
+        links.forEach(a => a.classList.remove('on'));
+        const a = links.get(e.target.id);
+        if (a) a.classList.add('on');
+      }
+    }, { rootMargin: '-80px 0px -70% 0px' });
+    heads.forEach(h => spy.observe(h));
+  }
+
+  function renderPager(page) {
+    const i = pages.indexOf(page);
+    const prev = pages[i - 1], next = pages[i + 1];
+    const nav = document.createElement('nav');
+    nav.className = 'pager';
+    nav.setAttribute('aria-label', 'Previous and next');
+    nav.innerHTML = (prev ? `<a href="${pageUrl(prev.id)}" data-id="${prev.id}"><small>Previous</small>${prev.title}</a>` : '')
+      + (next ? `<a class="next" href="${pageUrl(next.id)}" data-id="${next.id}"><small>Next</small>${next.title}</a>` : '');
+    doc.append(nav);
+  }
+
+  async function load(scrollTo) {
+    const id = current();
+    const page = pages.find(p => p.id === id) || pages[0];
+    renderNav();
+    try {
+      if (!cache.has(page.path)) {
+        const res = await fetch(RAW + page.path);
+        if (!res.ok) throw new Error(res.status);
+        cache.set(page.path, await res.text());
+      }
+      // Built in an inert <template> so relative image paths are rewritten before anything is fetched.
+      const tpl = document.createElement('template');
+      tpl.innerHTML = DOMPurify.sanitize(marked.parse(cache.get(page.path), { gfm: true }));
+      fixLinks(page, tpl.content);
+      doc.replaceChildren(tpl.content);
+      decorate();
+      renderToc(page);
+      renderPager(page);
+      const h1 = doc.querySelector('h1');
+      document.title = `${h1 && page.id !== 'readme' ? h1.textContent : page.title} · OrchidUI docs`;
+    } catch {
+      doc.innerHTML = `<div class="status">This page couldn't be loaded. You can read it on <a href="${BLOB}${page.path}">GitHub</a> instead.</div>`;
+      toc.innerHTML = '';
+    }
+    const target = scrollTo && document.getElementById(scrollTo);
+    if (target) target.scrollIntoView(); else if (scrollTo !== false) window.scrollTo(0, 0);
+  }
+
+  // Switch pages without reloading; headings keep normal #anchors.
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href^="?p="]');
+    if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
+    e.preventDefault();
+    const url = new URL(a.href);
+    history.pushState(null, '', url.search + url.hash);
+    load(url.hash.slice(1) || null);
+  });
+  picker.addEventListener('change', () => { history.pushState(null, '', pageUrl(picker.value)); load(null); });
+  window.addEventListener('popstate', () => load(location.hash.slice(1) || false));
+
+  discover().then(() => load(location.hash.slice(1) || false));
+  renderNav();
+</script>
+</body>
+</html>

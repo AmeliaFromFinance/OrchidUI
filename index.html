@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OrchidUI · settings windows for Streamer.bot actions</title>
+<meta name="description" content="OrchidUI is a library for Streamer.bot C# actions. Describe a settings window in your action's code, and OrchidUI draws it natively on Windows, Linux and macOS, validates it and saves the values for you.">
+<meta property="og:title" content="OrchidUI">
+<meta property="og:description" content="Settings windows for Streamer.bot actions, drawn natively on Windows, Linux and macOS.">
+<meta property="og:image" content="https://orchid.sinist3r.lol/img/og.jpg">
+<meta property="og:url" content="https://orchid.sinist3r.lol/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0d0a0f">
+<link rel="icon" href="favicon.png">
+<link rel="icon" type="image/svg+xml" href="img/logo.svg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&family=Roboto+Mono:wght@500&display=swap">
+<style>
+  :root {
+    color-scheme: dark;
+    --page: #0d0a0f; --card: #16121a; --card-2: #1c1720; --line: rgba(255, 255, 255, .08);
+    --text: #f7f0f5; --muted: #b4a9b3; --faint: #85798a;
+    --accent: #f28ac9; --accent-hover: #f6a8d7; --on-accent: #2b1130; --accent-soft: rgba(242, 138, 201, .12);
+    --purple: #a57cdb;
+    --font: Roboto, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+    --mono: "Roboto Mono", ui-monospace, Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--page); color: var(--text); font: 16px/1.6 var(--font); -webkit-font-smoothing: antialiased; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  img, video { display: block; max-width: 100%; height: auto; }
+  .wrap { width: min(1120px, 100% - 40px); margin-inline: auto; }
+
+  header { position: sticky; top: 0; z-index: 10; background: rgba(13, 10, 15, .75); backdrop-filter: blur(18px) saturate(1.4); -webkit-backdrop-filter: blur(18px) saturate(1.4); border-bottom: 1px solid var(--line); }
+  header .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .brand { display: flex; align-items: center; gap: 10px; color: var(--text); font-weight: 650; font-size: 17px; }
+  .brand:hover { text-decoration: none; }
+  .brand img { width: 30px; height: 30px; border-radius: 8px; }
+  nav { display: flex; gap: 22px; font-size: 14px; }
+  nav a { color: var(--muted); }
+  nav a:hover { color: var(--text); text-decoration: none; }
+
+  .hero { position: relative; padding: 88px 0 56px; text-align: center; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; inset: -20% 0 auto; height: 520px; background: radial-gradient(closest-side, rgba(242, 138, 201, .15), rgba(165, 124, 219, .06) 60%, transparent); pointer-events: none; }
+  .tag { display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: 13px; font-weight: 600; }
+  .tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+  h1 { position: relative; margin: 18px auto 14px; max-width: 800px; font-size: clamp(36px, 6vw, 60px); line-height: 1.05; letter-spacing: -.03em; font-weight: 700; }
+  h1 span { background: linear-gradient(90deg, #f28ac9, #e7a9e8, #a57cdb); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .lead { position: relative; margin: 0 auto 30px; max-width: 590px; color: var(--muted); font-size: 18px; }
+  .buttons { position: relative; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; height: 46px; padding: 0 22px; border-radius: 10px; font-weight: 600; font-size: 15px; }
+  .btn:hover { text-decoration: none; }
+  .btn-primary { background: var(--accent); color: var(--on-accent); }
+  .btn-primary:hover { background: var(--accent-hover); }
+  .btn-secondary { background: rgba(255, 255, 255, .06); color: var(--text); box-shadow: inset 0 0 0 1px var(--line); }
+  .btn-secondary:hover { background: rgba(255, 255, 255, .1); }
+  .btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+  .note { position: relative; margin-top: 14px; color: var(--faint); font-size: 13px; }
+  .shot { position: relative; margin: 56px auto 0; border-radius: 16px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 40px 100px rgba(0, 0, 0, .6), 0 0 0 1px rgba(242, 138, 201, .06); background: #16111d; }
+
+  section { padding: 72px 0; }
+  h2 { margin: 0 0 10px; font-size: clamp(26px, 3.5vw, 36px); line-height: 1.15; letter-spacing: -.02em; }
+  .sub { margin: 0 0 36px; color: var(--muted); max-width: 620px; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+  .card { padding: 22px; border-radius: 14px; background: var(--card); border: 1px solid var(--line); }
+  .card .ico { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; margin-bottom: 14px; border-radius: 10px; background: var(--accent-soft); color: var(--accent); }
+  .card .ico svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .card h3 { margin: 0 0 6px; font-size: 16px; }
+  .card p { margin: 0; color: var(--muted); font-size: 14.5px; }
+  code { padding: 1px 6px; border-radius: 5px; background: var(--accent-soft); color: var(--accent); font: 500 .9em var(--mono); }
+
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+  .steps { margin: 0; padding: 0; list-style: none; counter-reset: s; }
+  .steps li { counter-increment: s; display: flex; gap: 14px; padding: 16px 0; border-top: 1px solid var(--line); color: var(--muted); }
+  .steps li:last-child { border-bottom: 1px solid var(--line); }
+  .steps li::before { content: counter(s); flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-weight: 700; font-size: 14px; display: grid; place-items: center; }
+  .steps b { color: var(--text); }
+
+  .hosts { border-radius: 14px; background: var(--card); border: 1px solid var(--line); overflow: hidden; }
+  .hosts h3 { margin: 0; padding: 18px 22px 4px; font-size: 16px; }
+  .hosts p { margin: 0; padding: 0 22px 14px; color: var(--muted); font-size: 14px; }
+  .hosts table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+  .hosts td { padding: 13px 22px; border-top: 1px solid var(--line); vertical-align: top; }
+  .hosts td:first-child { color: var(--text); font-weight: 500; white-space: nowrap; }
+  .hosts td:last-child { color: var(--muted); }
+  .hosts small { display: block; margin-top: 2px; color: var(--faint); font-size: 12.5px; }
+
+  .codes { display: grid; gap: 14px; }
+  .codes-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 28px; align-items: center; }
+  .split > *, .codes > *, .codes-row > * { min-width: 0; }
+  .code { position: relative; margin: 0; border-radius: 14px; background: var(--card); border: 1px solid var(--line); overflow: hidden; }
+  .code figcaption { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px 10px 18px; border-bottom: 1px solid var(--line); color: var(--faint); font-size: 13px; }
+  .code pre { margin: 0; padding: 16px 18px 18px; overflow-x: auto; font: 500 13.5px/1.65 var(--mono); color: #e9dfe7; tab-size: 4; }
+  .code .k { color: #c9a8ff; } .code .t { color: #9fd3f5; } .code .s { color: #f7b2d9; } .code .n { color: #ffd6a5; } .code .c { color: var(--faint); } .code .m { color: #f0e2ee; font-weight: 600; }
+  .copy { display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 10px; border: 0; border-radius: 7px; background: rgba(255, 255, 255, .06); color: var(--muted); font: 500 12.5px var(--font); cursor: pointer; }
+  .copy:hover { background: rgba(255, 255, 255, .1); color: var(--text); }
+  .copy svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .codes .sub { margin: 0; font-size: 15px; }
+
+  .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: start; }
+  .gallery figure { margin: 0; }
+  .gallery button { display: block; width: 100%; padding: 0; border: 1px solid var(--line); background: none; cursor: zoom-in; border-radius: 14px; overflow: hidden; transition: transform .2s cubic-bezier(.16, 1, .3, 1); }
+  .gallery button:hover { transform: translateY(-3px); }
+  .gallery button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .gallery figcaption { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 8px; color: var(--faint); font-size: 13px; }
+  .gallery figcaption i { width: 10px; height: 10px; border-radius: 50%; background: var(--c); box-shadow: 0 0 0 1px rgba(255, 255, 255, .15); }
+
+  dialog { padding: 0; border: 0; background: transparent; max-width: 92vw; max-height: 92vh; }
+  dialog::backdrop { background: rgba(0, 0, 0, .8); backdrop-filter: blur(4px); }
+  dialog img { max-height: 90vh; width: auto; border-radius: 14px; }
+
+  .privacy { padding: 28px; border-radius: 16px; background: linear-gradient(135deg, rgba(242, 138, 201, .08), rgba(165, 124, 219, .04) 40%, transparent 65%), var(--card); border: 1px solid var(--line); }
+  .privacy p { margin: 0; color: var(--muted); max-width: 780px; }
+  .privacy h2 { font-size: 24px; }
+
+  footer { padding: 36px 0 48px; border-top: 1px solid var(--line); color: var(--faint); font-size: 13.5px; }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+  footer a { color: var(--muted); }
+
+  @media (max-width: 860px) {
+    .split, .codes-row { grid-template-columns: 1fr; gap: 28px; }
+    .grid { grid-template-columns: 1fr; }
+    .hosts td { padding: 12px 16px; }
+    .hosts td:first-child { white-space: normal; }
+    .gallery { grid-template-columns: repeat(2, 1fr); }
+    nav { display: none; }
+  }
+  /* Big screens: scale the whole page up so it keeps the same proportions as on 1080p. */
+  @media (min-width: 1800px) { html { zoom: 1.12; } }
+  @media (min-width: 2200px) { html { zoom: 1.25; } }
+  @media (min-width: 2500px) { html { zoom: 1.35; } }
+  @media (min-width: 3200px) { html { zoom: 1.7; } }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .gallery button { transition: none; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="#"><img src="img/icon.png" alt="">OrchidUI</a>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#install">Install</a>
+      <a href="#themes">Themes</a>
+      <a href="docs/">Docs</a>
+      <a href="https://github.com/AmeliaFromFinance/OrchidUI">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="wrap">
+      <span class="tag">Library for Streamer.bot C# actions</span>
+      <h1>Settings windows for your <span>Streamer.bot</span> actions</h1>
+      <p class="lead">Describe the window in your action's code. OrchidUI draws it natively on Windows, Linux and macOS, checks what people type, and saves it to a global variable.</p>
+      <div class="buttons">
+        <a class="btn btn-primary" href="https://github.com/AmeliaFromFinance/OrchidUI/releases/latest">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download</a>
+        <a class="btn btn-secondary" href="docs/">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5h9.5L19 9v10.5H5zM14.5 4.5V9H19M8.5 13h7M8.5 16.5h5"/></svg>Read the docs</a>
+      </div>
+      <p class="note">Free and open source (MIT). Windows 10 and 11, Linux through Wine, Bottles, Lutris or Proton, and macOS on Apple Silicon.</p>
+      <video class="shot" src="img/showcase.mp4" poster="img/showcase.jpg" width="1000" height="655" autoplay muted loop playsinline aria-label="OrchidUI in the Orchid theme: changing settings, a field appearing when a switch turns on, sliders, a multi-select, a table, a required field turning red, searching, and saving"></video>
+    </div>
+  </div>
+
+  <section id="features">
+    <div class="wrap">
+      <h2>Everything a settings window needs</h2>
+      <p class="sub">Most elements take a label, a description and a key. The key is the name the value is saved under.</p>
+      <div class="grid">
+        <div class="card"><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg></span>
+          <h3>Every kind of setting</h3><p>Switches, sliders, dropdowns, multi-selects, durations, colours, tables, file pickers, images and buttons.</p></div>
+        <div class="card"><span class="ico"><svg viewBox="0 0 24 24"><path d="M5 12.5 10 17.5 19 7"/></svg></span>
+          <h3>Conditions and checks</h3><p><code>ShowWhen</code> and <code>EnableWhen</code> react as values change. <code>Required</code> and <code>Validate</code> turn a card red and hold off saving.</p></div>
+        <div class="card"><span class="ico"><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0 0 18c1.5 0 2.2-.8 2.2-1.8 0-1.4-1.2-1.8-1.2-3 0-1.1.9-1.7 2-1.7h2a4 4 0 0 0 4-4C21 6.4 17 3 12 3Z"/><circle cx="7.5" cy="11.5" r=".9"/><circle cx="9.5" cy="7.5" r=".9"/><circle cx="14.5" cy="7.5" r=".9"/></svg></span>
+          <h3>Six themes</h3><p>Orchid, Amethyst, Sakura, Synthwave, Graphite and Daylight. Or set your own accent, fonts and sizes in a theme file.</p></div>
+        <div class="card"><span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="12.5" rx="2"/><path d="M8 20.5h8M12 17v3.5"/></svg></span>
+          <h3>Native on every desktop</h3><p>Under Wine, the window is drawn by a native Linux or macOS program, so it uses your own fonts, scaling and screen reader.</p></div>
+        <div class="card"><span class="ico"><svg viewBox="0 0 24 24"><path d="M19.5 6c0 1.7-3.4 3-7.5 3S4.5 7.7 4.5 6 7.9 3 12 3s7.5 1.3 7.5 3ZM4.5 6v12c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3V6M4.5 12c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3"/></svg></span>
+          <h3>Read it anywhere</h3><p>Values are plain JSON in <code>orchid_{NAME}</code>. Read them from any action with <code>OrchidSettings.Load</code>, or without the DLL at all.</p></div>
+        <div class="card"><span class="ico"><svg viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/></svg></span>
+          <h3>Keyboard and screen readers</h3><p><code>Ctrl+S</code> saves, <code>Ctrl+F</code> searches every tab, <code>Ctrl+1</code> to <code>9</code> switches tabs. Every control has a name for screen readers.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="install">
+    <div class="wrap split">
+      <div>
+        <h2>Set up in a few minutes</h2>
+        <p class="sub">Two downloads from the same release: the DLL your action references, and a small host program that draws the window.</p>
+        <ol class="steps">
+          <li><span><b>Download</b> <code>OrchidUI.dll</code> and the host zip for your system from <a href="https://github.com/AmeliaFromFinance/OrchidUI/releases/latest">Releases</a>.</span></li>
+          <li><span><b>With Streamer.bot closed</b>, put the DLL next to <code>Streamer.bot.exe</code> and unzip the host into a folder called <code>OrchidUI</code> beside it.</span></li>
+          <li><span><b>Reference the DLL.</b> In your Execute C# Code sub-action, go to References, then Add reference from file.</span></li>
+          <li><span><b>Run your action.</b> Streamer.bot's log says <code>Settings window opened</code>.</span></li>
+        </ol>
+      </div>
+      <div class="hosts">
+        <h3>Which host zip?</h3>
+        <p>Pick the one for the system you're on, even when Streamer.bot runs under Wine.</p>
+        <table>
+          <tr><td>Windows 10 or 11</td><td><code>orchid-host-win-x64.zip</code></td></tr>
+          <tr><td>Linux</td><td><code>orchid-host-linux-x64.zip</code><small>or <code>linux-arm64</code> on ARM. Wine, Bottles, Lutris and Proton. <a href="docs/?p=linux">Linux guide</a></small></td></tr>
+          <tr><td>macOS</td><td><code>orchid-host-osx-arm64.zip</code><small>Apple Silicon, with Whisky, CrossOver or Wine. <a href="docs/?p=macos">macOS guide</a></small></td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="code">
+    <div class="wrap">
+      <h2>Your first window</h2>
+      <p class="sub">Paste this into an Execute C# Code sub-action and run it. Add tabs, conditions and checks as you go.</p>
+      <div class="codes">
+        <figure class="code">
+          <figcaption>Settings action<button class="copy" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="12" rx="1.5"/><path d="M16 9V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H9"/></svg>Copy</button></figcaption>
+<pre><span class="k">using</span> OrchidUI;
+
+<span class="k">public class</span> <span class="t">CPHInline</span>
+{
+    <span class="k">public bool</span> <span class="m">Execute</span>()
+    {
+        <span class="k">if</span> (<span class="t">Orchid</span>.<span class="m">AlreadyOpened</span>(<span class="s">"SHOUTOUTS"</span>)) <span class="k">return true</span>;
+
+        <span class="k">var</span> ui = <span class="k">new</span> <span class="t">Orchid</span>(CPH, <span class="s">"SHOUTOUTS"</span>, <span class="s">"1.0.0"</span>)
+            .<span class="m">SetWindowSize</span>(<span class="n">620</span>, <span class="n">520</span>)
+            .<span class="m">SetAutoSave</span>(<span class="k">true</span>);
+
+        <span class="k">var</span> tab = ui.<span class="m">Tab</span>(<span class="s">"Shoutouts"</span>, <span class="t">Icons</span>.Megaphone);
+
+        tab.<span class="m">AddToggleSwitch</span>(<span class="s">"Enabled"</span>, <span class="s">"Shout out raiders."</span>, <span class="s">"enabled"</span>, <span class="k">true</span>);
+        tab.<span class="m">AddIntegerStepper</span>(<span class="s">"Min Raiders"</span>, <span class="s">"Smaller raids are ignored."</span>, <span class="s">"minRaiders"</span>, <span class="n">1</span>, <span class="n">1000</span>, <span class="n">5</span>);
+        tab.<span class="m">AddResponseBox</span>(<span class="s">"Message"</span>, <span class="s">"Variables: %user%"</span>, <span class="s">"message"</span>, <span class="s">"Go follow @%user%!"</span>);
+
+        ui.<span class="m">ShowUI</span>();
+        <span class="k">return true</span>;
+    }
+}</pre>
+        </figure>
+        <div class="codes-row">
+          <figure class="code">
+            <figcaption>Any other action<button class="copy" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="12" rx="1.5"/><path d="M16 9V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H9"/></svg>Copy</button></figcaption>
+<pre><span class="k">var</span> cfg = <span class="t">OrchidSettings</span>.<span class="m">Load</span>(CPH, <span class="s">"SHOUTOUTS"</span>);
+
+<span class="k">bool</span> on = cfg.<span class="m">GetBool</span>(<span class="s">"enabled"</span>, <span class="k">true</span>);
+<span class="k">int</span> min = cfg.<span class="m">GetInt</span>(<span class="s">"minRaiders"</span>, <span class="n">5</span>);
+<span class="k">string</span> msg = cfg.<span class="m">GetString</span>(<span class="s">"message"</span>);</pre>
+          </figure>
+          <p class="sub">The second argument is the fallback. Lists, tables and durations have their own getters, and the <a href="docs/#elements">docs</a> list every element and modifier.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="themes">
+    <div class="wrap">
+      <h2>Themes</h2>
+      <p class="sub">Dark by default, with an orchid pink accent. Pick one with <code>SetTheme("Sakura")</code>, or users can choose their own with <code>ORCHIDUI_THEME</code>.</p>
+      <div class="gallery">
+        <figure><button type="button"><img src="img/theme-orchid.jpg" width="1180" height="800" alt="The Hype Timer example in the Orchid theme" loading="lazy"></button><figcaption><i style="--c:#f28ac9"></i>Orchid</figcaption></figure>
+        <figure><button type="button"><img src="img/theme-amethyst.jpg" width="1180" height="800" alt="The Hype Timer example in the Amethyst theme" loading="lazy"></button><figcaption><i style="--c:#c4a4da"></i>Amethyst</figcaption></figure>
+        <figure><button type="button"><img src="img/theme-sakura.jpg" width="1180" height="800" alt="The Hype Timer example in the Sakura theme" loading="lazy"></button><figcaption><i style="--c:#ff9ec9"></i>Sakura</figcaption></figure>
+        <figure><button type="button"><img src="img/theme-synthwave.jpg" width="1180" height="800" alt="The Hype Timer example in the Synthwave theme" loading="lazy"></button><figcaption><i style="--c:#ff4fd8"></i>Synthwave</figcaption></figure>
+        <figure><button type="button"><img src="img/theme-graphite.jpg" width="1180" height="800" alt="The Hype Timer example in the Graphite theme" loading="lazy"></button><figcaption><i style="--c:#f48fc8"></i>Graphite</figcaption></figure>
+        <figure><button type="button"><img src="img/theme-daylight.jpg" width="1180" height="800" alt="The Hype Timer example in the Daylight theme" loading="lazy"></button><figcaption><i style="--c:#c2378a"></i>Daylight</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="privacy">
+        <h2>Built to fail safely</h2>
+        <p>The window runs as its own program. If it crashes, Streamer.bot logs it and carries on, and running the action again reopens it. A release DLL only starts the host files from its own release, checked by SHA-256, and every download has build provenance you can check with <code>gh attestation verify</code>. Passwords are masked on screen and in logs, but saved as plain text, like any global variable. OrchidUI isn't affiliated with Streamer.bot. <a href="https://github.com/AmeliaFromFinance/OrchidUI/blob/main/SECURITY.md">Security policy</a></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>OrchidUI by ame.owo · See also <a href="https://rainbark.sinist3r.lol">Rainbark</a> and <a href="https://pronouns.sinist3r.lol">Pronoun Tags</a></span>
+    <span><a href="https://github.com/AmeliaFromFinance/OrchidUI">Source</a> · <a href="docs/">Docs</a> · <a href="https://github.com/AmeliaFromFinance/OrchidUI/issues">Report a problem</a></span>
+  </div>
+</footer>
+
+<dialog id="viewer"><img alt=""></dialog>
+<script>
+  // Click a gallery image to see it full size.
+  const viewer = document.getElementById('viewer');
+  document.querySelectorAll('.gallery button').forEach(button => button.addEventListener('click', () => {
+    const img = button.querySelector('img');
+    viewer.querySelector('img').src = img.src;
+    viewer.querySelector('img').alt = img.alt;
+    viewer.showModal();
+  }));
+  viewer.addEventListener('click', () => viewer.close());
+
+  // Copy a code sample.
+  document.querySelectorAll('.copy').forEach(button => button.addEventListener('click', async () => {
+    const label = button.lastChild;
+    try {
+      await navigator.clipboard.writeText(button.closest('.code').querySelector('pre').innerText);
+      label.textContent = 'Copied';
+    } catch {
+      label.textContent = 'Press Ctrl+C';
+    }
+    setTimeout(() => { label.textContent = 'Copy'; }, 1600);
+  }));
+
+  // Respect reduced motion: show the first frame with controls instead of looping.
+  const video = document.querySelector('video.shot');
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    video.removeAttribute('autoplay');
+    video.pause();
+    video.controls = true;
+  }
+</script>
+</body>
+</html>
