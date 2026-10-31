@@ -38,9 +38,26 @@ Never update them just to make a failing test pass. A mismatch writes a `*.recei
 
 Keep each pull request to one topic and include tests. A bug fix should come with a test that fails without it. CI has to pass on Windows, Linux and macOS. The nightly Wine job can be flaky, so mention it if your change touches the Wine path.
 
+## Scripts
+
+`scripts/` has shortcuts for the usual chores. They run in bash: Linux, macOS, or Git Bash on Windows. Add `--help` to any of them for the options.
+
+| Script | What it does |
+|---|---|
+| `scripts/test.sh` | Builds and runs the same checks as CI. `--quick` runs only the DLL tests |
+| `scripts/commit.sh "message"` | Commits all your changes. `-t` runs the quick tests first, `-p` pushes after |
+| `scripts/push.sh` | Checks GitHub's newer commits don't clash with yours, puts yours on top, tests, pushes |
+| `scripts/status.sh` | Branch, changes, what's waiting to push or pull, latest builds and drafts |
+| `scripts/bundle.sh` | Zips the project into `dist/`, leaving out everything in `.gitignore` |
+| `scripts/release.sh 1.2.0` | Sets the version, dates the CHANGELOG, tests, and pushes the tag. `--watch` waits for the build |
+| `scripts/publish.sh` | Makes the draft release public. `--verify` checks the files against `SHA256SUMS` first |
+| `scripts/unrelease.sh 1.2.0` | Deletes an unpublished draft and its tag, so you can fix something and release again |
+
+`release.sh`, `publish.sh` and `unrelease.sh` ask before doing anything; `YES=1` skips the question. The last three need the [GitHub CLI](https://cli.github.com) (`gh auth login` once).
+
 ## Releasing
 
-1. Bump `<Version>` in `Directory.Build.props`.
-2. Give the "Unreleased" section in the CHANGELOG a version and date.
-3. Tag `vX.Y.Z` and push the tag. The release workflow builds and pins everything and ad-hoc signs the macOS host.
-4. Go through [docs/release-checklist.md](docs/release-checklist.md) on the draft release.
+1. Add what changed under a `## Unreleased` heading in the CHANGELOG.
+2. Run `scripts/release.sh X.Y.Z`. It bumps `<Version>` in `Directory.Build.props`, dates the CHANGELOG section, and pushes the `vX.Y.Z` tag. The release workflow builds and pins everything, ad-hoc signs the macOS host, and makes a draft release.
+3. Go through [docs/release-checklist.md](docs/release-checklist.md) on the draft release.
+4. Run `scripts/publish.sh X.Y.Z`.
