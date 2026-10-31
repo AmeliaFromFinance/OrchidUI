@@ -280,7 +280,8 @@ namespace OrchidUI.Tests
                 using (var host = FakeHost.Start("tcp", HypeTimer, cph).Open())
                 {
                     Assert.True(FakeHost.WaitUntil(() => !host.Orchid.IsOpen, 5));
-                    Assert.Contains(cph.Logged("ERROR"), l => l.Contains("stopped responding"));
+                    // IsOpen turns false as soon as closing starts; the error is logged just after, on the callback thread.
+                    Assert.True(FakeHost.WaitUntil(() => cph.Logged("ERROR").Any(l => l.Contains("stopped responding")), 5));
                 }
             }
             finally
